@@ -1,6 +1,6 @@
 function output = pplane8(action,input1,input2,input3)
 
-% pplane8  is an interactive tool for studying planar autonomous systems of
+%   pplane8  is an interactive tool for studying planar autonomous systems of
 %	differential equations.  When pplane8 is executed, a pplane8 Setup
 %	window is opened.  The user may enter the differential
 %	equation and specify a display window using the interactive
@@ -17,11 +17,10 @@ function output = pplane8(action,input1,input2,input3)
 %	Other options are available in the menus.  These are
 %	fairly self explanatory.  
 %
-%	This is version 6.0, and will only run on version 6 of MATLAB.
-
-%  Copywright (c)  1995, 1997, 1998, 1999, 2000, 2001, 2002, 2003 
-%                  John C. Polking, Rice University
-%                  Last Modified: April 24, 2003
+%	This is  the latest version that will run on MATLAB 9.0
+ 
+%                  Hugh Harvey, George Williams, University of Bristol
+%                  Last Modified: February 6, 2016
 
 startstr = 'pplane8';
 if nargin < 1
@@ -452,7 +451,7 @@ if strcmp(action,'initialize')
   
   
   xname=[
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'Xname=get(ud.h.xvar,''string'');'...
       'minxstr = [''The minimum value of '',Xname,'' = ''];',...
       'set(ud.h.twind(1),''string'',minxstr);'...
@@ -461,10 +460,10 @@ if strcmp(action,'initialize')
       'ud.c.xvar = Xname;'...
       'ud.flag = 0;'...
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   yname=[
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'Yname=get(ud.h.yvar,''string'');'...
       'minystr = [''The minimum value of '',Yname,'' = ''];',...
       'set(ud.h.twind(3),''string'',minystr);'...
@@ -473,21 +472,21 @@ if strcmp(action,'initialize')
       'ud.c.yvar = Yname;'...
       'ud.flag = 0;'...
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   xder =[
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'ud.c.xder = get(ud.h.xder,''string'');'...
       'ud.flag = 0;'...
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   yder =[
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'ud.c.yder = get(ud.h.yder,''string'');'...
       'ud.flag = 0;'...
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   equationbot = defrbot + 5;
   eqlabelbot = equationbot + 2*separation;
@@ -548,7 +547,7 @@ if strcmp(action,'initialize')
   frame(2) = uicontrol('style','frame','pos',disfrwind,'visible','off');
   
   w1 = [
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'nnn = 	str2num(get(ud.h.wind(1),''string''));'...
       'if isempty(nnn),',...
       '  set(ud.h.wind(1),''string'',''?'');',...
@@ -556,10 +555,10 @@ if strcmp(action,'initialize')
       'end,',...
       'ud.c.wind(1) = nnn;',...	    
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];	
+      'set(gcf,''user'',ud);'];	
   
   w2 = [
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'nnn = 	str2num(get(ud.h.wind(2),''string''));'...
       'if isempty(nnn),',...
       '  set(ud.h.wind(2),''string'',''?'');',...
@@ -567,10 +566,10 @@ if strcmp(action,'initialize')
       'end,',...
       'ud.c.wind(2) = nnn;',...	    
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];	
+      'set(gcf,''user'',ud);'];	
   
   w3 = [
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'nnn = 	str2num(get(ud.h.wind(3),''string''));'...
       'if isempty(nnn),',...
       '  set(ud.h.wind(3),''string'',''?'');',...
@@ -578,10 +577,10 @@ if strcmp(action,'initialize')
       'end,',...
       'ud.c.wind(3) = nnn;',...	    
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];	
+      'set(gcf,''user'',ud);'];	
   
   w4 = [
-      'ud = get(gcf,''UserData'');'...
+      'ud = get(gcf,''user'');'...
       'nnn = 	str2num(get(ud.h.wind(4),''string''));'...
       'if isempty(nnn),',...
       '  set(ud.h.wind(4),''string'',''?'');',...
@@ -589,7 +588,7 @@ if strcmp(action,'initialize')
       'end,',...
       'ud.c.wind(4) = nnn;',...	    
       'ud.c.name = '''';',...
-      'set(gcf,''UserData'',ud);'];	
+      'set(gcf,''user'',ud);'];	
   
   
   winbot1 = disfrbot + disfrht - 5 - separation;
@@ -667,19 +666,19 @@ if strcmp(action,'initialize')
   
   pncall = [
       '[h,fig] = gcbo;'...
-      'ud =  get(fig,''UserData'');'...
-      'num = get(h,''UserData'');'...
+      'ud =  get(fig,''user'');'...
+      'num = get(h,''user'');'...
       'ud.c.pname{num} = get(ud.h.pname(num),''string'');'...
       'ud.flag = 0;'...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   pvcall = [
       '[h,fig] = gcbo;'...
-      'ud =  get(fig,''UserData'');'...
-      'num = get(h,''UserData'');'...
+      'ud =  get(fig,''user'');'...
+      'num = get(h,''user'');'...
       'ud.c.pval{num} = get(ud.h.pval(num),''string'');'...
       'ud.flag = 0;'...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   
   pnamew = 40*rr;
@@ -720,7 +719,7 @@ if strcmp(action,'initialize')
       ud.h.pname(K) = uicontrol('style','edit',...
 				'pos',[pleft pbot(jj) pnamew texth],...
 				'horizon','right','string',name,...
-				'UserData',K,...
+				'user',K,...
 				'call',pncall,...
 				'visible','off',...
 				'backgroundcolor','w');
@@ -735,7 +734,7 @@ if strcmp(action,'initialize')
 			       'string',value,...
 			       'call',pvcall,...
 			       'visible','off',...
-			       'UserData',K,...
+			       'user',K,...
 			       'backgroundcolor','w');
     end
   end
@@ -824,22 +823,22 @@ if strcmp(action,'initialize')
 			  'visible','off');
   
   for i=1:4
-    set(ud.h.rad(i),'UserData',ud.h.rad(:,[1:(i-1),(i+1):4]));
+    set(ud.h.rad(i),'user',ud.h.rad(:,[1:(i-1),(i+1):4]));
   end
    
   callrad = [
       'me = get(gcf,''currentobject'');',...
       'kk = get(me,''max'');',...
-      'set(get(me,''UserData''),''value'',0),',...
+      'set(get(me,''user''),''value'',0),',...
       'set(me,''value'',kk);',...
-      'ud = get(gcf,''UserData'');',...
+      'ud = get(gcf,''user'');',...
       'switch kk,',...
       '       case 1, ud.c.fieldtype = ''nullclines'';',...
       '       case 2, ud.c.fieldtype = ''lines'';',...
       '       case 3, ud.c.fieldtype = ''arrows'';',...
       '       case 4, ud.c.fieldtype = ''none'';',...
       'end,',...
-      'set(gcf,''UserData'',ud);'];
+      'set(gcf,''user'',ud);'];
   
   set(ud.h.rad,'call',callrad);
   
@@ -852,7 +851,7 @@ if strcmp(action,'initialize')
   
   callnfpts = [
       'ppset = findobj(''name'',''pplane8 Setup'');',...
-      'ud = get(ppset,''UserData'');'...
+      'ud = get(ppset,''user'');'...
       'me = ud.h.npts;',...
       'kk = str2num(get(me,''string''));',...
       'if isempty(kk),',...
@@ -870,7 +869,7 @@ if strcmp(action,'initialize')
       '  set(me,''string'',num2str(kk));'...
       'end,'...
       'ud.c.npts = kk;',...
-      'set(ppset,''UserData'',ud);'];
+      'set(ppset,''user'',ud);'];
   
   npos = [textleft+(textw -30*rr)/2,winbot5 30*rr,texth];
   ud.h.npts = uicontrol('style','edit',...
@@ -880,12 +879,12 @@ if strcmp(action,'initialize')
 			'backgroundcolor','w',...
 			'visible','off');
   
-  delgall = ['sud = get(gcf,''UserData'');',...
+  delgall = ['sud = get(gcf,''user'');',...
 	     'mh = get(sud.h.gallery,''children'');',...
 	     'add = findobj(sud.h.gallery,''tag'',''add system'');',...
 	     'mh(find(mh == add)) = [];',...
 	     'delete(mh);',...
-	     'set(sud.h.gallery,''UserData'',[]);',...
+	     'set(sud.h.gallery,''user'',[]);',...
 	     'set(findobj(''tag'',''load default''),''enable'',''on'')'];
   
   
@@ -906,29 +905,29 @@ if strcmp(action,'initialize')
   mepset = findobj(mefile,'label','Pa&ge Setup...');
   set(get(mefile,'child'),'vis','off');
   meload = uimenu(mefile,'label','Load a system ...',...
-		  'call','pplane8(''loadsyst'',''system'');',...
+		  'callback','pplane8(''loadsyst'',''system'');',...
 		  'pos',1);
   mesave = uimenu(mefile,'label','Save the current system ...',...
-		  'call','pplane8(''savesyst'',''system'');',...
+		  'callback','pplane8(''savesyst'',''system'');',...
 		  'pos',2);
   meloadg = uimenu(mefile,'label','Load a gallery ...',...
-		   'call','pplane8(''loadsyst'',''gallery'');',...
+		   'callback','pplane8(''loadsyst'',''gallery'');',...
 		   'separator','on','pos',3);
   mesaveg = uimenu(mefile,'label','Save a gallery ...',...
-		   'call','pplane8(''savesyst'',''gallery'');',...
+		   'callback','pplane8(''savesyst'',''gallery'');',...
 		   'tag','savegal','pos',4);
   medelg = uimenu(mefile,'label','Delete the current gallery',...
-		  'call',delgall,'pos',5);
+		  'callback',delgall,'pos',5);
   melddg = uimenu(mefile,'label','Load the default gallery',...
-		  'call','pplane8(''loadsyst'',''default'');',...
+		  'callback','pplane8(''loadsyst'',''default'');',...
 		  'enable','on',...
 		  'tag','load default','pos',6);
-  merevert = uimenu(mefile,'label','Revert','call',...
+  merevert = uimenu(mefile,'label','Revert','callback',...
 		    'pplane8(''revert'')',...
 		    'separator','on','pos',7);
   meproceed = uimenu(mefile,...
 		     'label','Proceed',...
-		     'call','pplane8(''proceed'')',...
+		     'callback','pplane8(''proceed'')',...
 		     'separator','off',...
 		     'accelerator','G','pos',8);
   set(mepset,'vis','on','pos',9);
@@ -936,50 +935,50 @@ if strcmp(action,'initialize')
   set(meexp,'vis','on','pos',11,'separator','off');
   merestart = uimenu(mefile,'label',...
 		     'Restart pplane8',...
-		     'call','pplane8(''restart'')',...
+		     'callback','pplane8(''restart'')',...
 		     'separator','on','pos',12);
   
   mequit = uimenu(mefile,...
 		  'label','Quit pplane8',...
-		  'call','pplane8(''quit'')',...
+		  'callback','pplane8(''quit'')',...
 		  'separator','off','pos',13);
   
   % Edit menu
   
   set(get(meedit,'child'),'vis','off');
   meclrf = uimenu(meedit,'label','Clear equations',...
-		  'call',['ud = get(gcf,''UserData'');h = ud.h;',...
+		  'callback',['ud = get(gcf,''user'');h = ud.h;',...
 		    'set([h.xvar,h.xder,h.yvar,h.yder],''string'','''');'],...
 		  'accelerator','E');
   
   pclear = [
-      'ud = get(gcf,''UserData'');h = ud.h;',...
+      'ud = get(gcf,''user'');h = ud.h;',...
       'set([h.pname,h.pval],''string'','''');',...
       'ud.c.pname = {'''','''','''','''','''','''',''''};',...
       'ud.c.pval = {'''','''','''','''','''','''',''''};',...
-      'set(gcf,''UserData'',ud);',...
+      'set(gcf,''user'',ud);',...
 	   ];
   
   meclrp = uimenu(meedit,'label','Clear parameters',...
-      'call',pclear,...
+      'callback',pclear,...
       'accelerator','N');
   
   meclrwind = uimenu(meedit,'label','Clear display window',...
-      'call',['ud = get(gcf,''UserData'');',...
+      'callback',['ud = get(gcf,''user'');',...
          'set(ud.h.wind,''string'','''');'],...
       'accelerator','D');
   
   allclear = [
-      'ud = get(gcf,''UserData'');h = ud.h;',...
+      'ud = get(gcf,''user'');h = ud.h;',...
       'set([h.xvar,h.xder,h.yvar,h.yder],''string'','''');',...
       'set([h.pname,h.pval,h.wind],''string'','''');',...
       'ud.c.pname = {'''','''','''','''','''','''',''''};',...
       'ud.c.pval = {'''','''','''','''','''','''',''''};',...
-      'set(gcf,''UserData'',ud);',...
+      'set(gcf,''user'',ud);',...
 	     ];
   
   meclrall = uimenu(meedit,'label','Clear all',...
-      'call',allclear,...
+      'callback',allclear,...
       'accelerator','A',...
       'separator','on');
   
@@ -988,23 +987,23 @@ if strcmp(action,'initialize')
    sysmenu = uimenu('label','Gallery','visible','off','pos',3);
    
    meadd = uimenu(sysmenu,'label','Add current system to the gallery',...
-      'call','pplane8(''addgall'');','tag','add system');
+      'callback','pplane8(''addgall'');','tag','add system');
    sep = 'on';
    for kk = 1:length(system)
       kkk = num2str(kk);
       if kk == 2, sep = 'off';end
       sysmen(kk) = uimenu(sysmenu,'label',system(kk).name,...
-         'call',['pplane8(''system'',',kkk,')'],...
+         'callback',['pplane8(''system'',',kkk,')'],...
          'separator',sep,'visible','off');
    end
-   set(sysmenu,'UserData',system);
+   set(sysmenu,'user',system);
    ud.h.gallery = sysmenu;
    ud.flag = 0;
    ud.egg = (exist('EASTEREGG') ==2);
    
    % Record the handles in the User Data of the Set Up figure.
    
-   set(ppset,'UserData',ud);
+   set(ppset,'user',ud);
    hhhh = findobj(ppset,'type','uicontrol');
    set(hhhh,'units','normal')
    
@@ -1018,11 +1017,11 @@ elseif strcmp(action,'savesyst')
    
    ppset = findobj('name','pplane8 Setup');
    type = input1;
-   sud = get(ppset,'UserData');
+   sud = get(ppset,'user');
    
    switch type
    case 'system'  
-      systems = get(sud.h.gallery,'UserData');
+      systems = get(sud.h.gallery,'user');
       
       newsyst = sud.c;
       fn = newsyst.name;
@@ -1050,12 +1049,12 @@ elseif strcmp(action,'savesyst')
          end
          newsyst.name = fn;
          sud.c.name = fn;
-         set(ppset,'UserData',sud);
+         set(ppset,'user',sud);
       end
       newsysts = newsyst;
       
    case 'gallery'
-      systems = get(sud.h.gallery,'UserData');
+      systems = get(sud.h.gallery,'user');
       ll = length(systems); 
       if ll == 0
 	warndlg(['There are no systems to make up a gallery.'],'Warning');
@@ -1091,7 +1090,7 @@ elseif strcmp(action,'savesyst')
       end
       newsyst.name = fn(1:ll-4);
       sud.c.name = fn(1:ll-4);
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       
    end  % switch type
    
@@ -1171,11 +1170,11 @@ elseif strcmp(action,'savesyst')
    
 elseif strcmp(action,'loadsyst')  % This loads either a system or a gallery.
    
-   sud = get(gcf,'UserData');
+   sud = get(gcf,'user');
    pos = get(gcf,'pos');
    wpos = [pos(1),pos(2)+pos(4)+20,300,20];
    waith = figure('pos',wpos,...
-		  'NumberTitle','off',...
+		  'numbertitle','off',...
 		  'vis','off',...
 		  'next','replace',...
 		  'menubar','none',...
@@ -1199,7 +1198,7 @@ elseif strcmp(action,'loadsyst')  % This loads either a system or a gallery.
      add = findobj(megall,'tag','add system');
      mh(find(mh == add)) = [];
      delete(mh);
-     newsysstruct = get(megall,'UserData');
+     newsysstruct = get(megall,'user');
      system = sud.system;
      ll = length(system);
      x = 1/(ll+2);
@@ -1212,10 +1211,10 @@ elseif strcmp(action,'loadsyst')  % This loads either a system or a gallery.
        kkk = num2str(kk);
        if kk ==2, sep = 'off';end
        uimenu(megall,'label',system(kk).name,...
-	      'call',['pplane8(''system'',',kkk,')'],...
+	      'callback',['pplane8(''system'',',kkk,')'],...
 	      'separator',sep);
      end % for
-     set(megall,'UserData',system);
+     set(megall,'user',system);
    else
      comp = computer;
      switch  comp
@@ -1368,7 +1367,7 @@ elseif strcmp(action,'loadsyst')  % This loads either a system or a gallery.
       if ignore > 0 % The system was ignored.
          kk = ignore;
       else
-         systems = get(sud.h.gallery,'UserData');
+         systems = get(sud.h.gallery,'user');
          kk = length(systems);
       end
       pplane8('system',kk);
@@ -1388,7 +1387,7 @@ elseif strcmp(action,'addgall')
    
   output = 0;
   ppset = findobj('name','pplane8 Setup');
-  sud = get(ppset,'UserData');
+  sud = get(ppset,'user');
   if nargin < 2    % We are adding the current system.
     
     syst = sud.c;
@@ -1398,7 +1397,7 @@ elseif strcmp(action,'addgall')
     sname = sname{1};
     if ~strcmp(sname,syst.name)
       sud.c.name = sname;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       syst.name = sname;
     end  
     
@@ -1415,7 +1414,7 @@ elseif strcmp(action,'addgall')
     syst.pval{kk} = '';
   end
 
-  systems = get(sud.h.gallery,'UserData');
+  systems = get(sud.h.gallery,'user');
   ll = length(systems);
   kk = 1;
   while ((kk<=ll) & (~strcmp(sname,systems(kk).name)))
@@ -1467,7 +1466,7 @@ elseif strcmp(action,'addgall')
     output = -1;
    otherwise
   end  % switch
-  set(sud.h.gallery,'UserData',systems);
+  set(sud.h.gallery,'user',systems);
   syst.name = sname;
   if flag <=1
     switch ll
@@ -1487,21 +1486,21 @@ elseif strcmp(action,'addgall')
     end      
     kkk = num2str(ll+1); 
     newmenu = uimenu(sud.h.gallery,'label',sname,...
-		     'call',['pplane8(''system'',',kkk,')'],...
+		     'callback',['pplane8(''system'',',kkk,')'],...
 		     'separator',sepstr);
     set(findobj('tag','savegal'),'enable','on');
   end
-  set(sud.h.gallery,'UserData',systems);
+  set(sud.h.gallery,'user',systems);
   
 elseif strcmp(action,'system')
   
    ppset = findobj('name','pplane8 Setup');
-   ud = get(ppset,'UserData');
+   ud = get(ppset,'user');
    kk = input1;
    if isstr(kk)
       kk = str2num(input1);
    end
-   system = get(ud.h.gallery,'UserData');
+   system = get(ud.h.gallery,'user');
    syst = system(kk);
    xname = syst.xvar;
    yname = syst.yvar;
@@ -1555,11 +1554,11 @@ elseif strcmp(action,'system')
       set(ud.h.rad(i),'value',rval(i));
    end	
    ud.flag = 0;
-   set(ppset,'UserData',ud);
+   set(ppset,'user',ud);
    
 elseif strcmp(action,'revert')
    
-   ud = get(gcf,'UserData');
+   ud = get(gcf,'user');
    ud.c = ud.o;
    syst = ud.o;
    xname = syst.xvar;
@@ -1610,16 +1609,16 @@ elseif strcmp(action,'revert')
    for i=1:3
      set(ud.h.rad(i),'value',rval(i));
    end	
-   set(gcf,'UserData',ud);
+   set(gcf,'user',ud);
    
 elseif strcmp(action,'proceed')
    
    % Proceed connects Setup with the Display window.
    
    ppset = gcf;
-   sud = get(ppset,'UserData');
+   sud = get(ppset,'user');
    sud.o = sud.c;
-   set(ppset,'UserData',sud);
+   set(ppset,'user',sud);
    he = findobj('name','pplane8 Equilibrium point data');
    hl = findobj('name','pplane8 Linearization');
    close([he;hl]);
@@ -1630,7 +1629,7 @@ elseif strcmp(action,'proceed')
    WINvect = sud.c.wind;
    if any(isnan(WINvect))
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = ['One of the entries defining the display window ',...
             'is not a number.'];
       fprintf('\a')
@@ -1640,7 +1639,7 @@ elseif strcmp(action,'proceed')
    xstr = sud.c.xvar;
    if isempty(xstr)
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = 'The first dependent variable needs a name.';
       fprintf('\a')
       errordlg(errmsg,'PPLANE error','on');
@@ -1649,7 +1648,7 @@ elseif strcmp(action,'proceed')
    ystr = sud.c.yvar;
    if isempty(ystr)
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = 'The second dependent variable needs a name.';
       fprintf('\a')
       errordlg(errmsg,'PPLANE error','on');
@@ -1657,7 +1656,7 @@ elseif strcmp(action,'proceed')
    end
    if WINvect(2)<= WINvect(1)
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = ['The minimum value of ', xstr,...
             ' must be smaller than the maximum value.'];
       fprintf('\a')
@@ -1666,7 +1665,7 @@ elseif strcmp(action,'proceed')
    end
    if WINvect(4)<= WINvect(3)
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = ['The minimum value of ', ystr,...
             ' must be smaller than the maximum value.'];
       fprintf('\a')
@@ -1675,7 +1674,7 @@ elseif strcmp(action,'proceed')
    end
    if isnan(sud.c.npts)
       sud.flag = 0;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
       errmsg = 'The entry for the number of field points is not a number.';
       fprintf('\a')
       errordlg(errmsg,'PPLANE error','on');
@@ -1692,21 +1691,21 @@ elseif strcmp(action,'proceed')
      Arrflag = sud.c.fieldtype;
      NumbFPts = sud.c.npts;
      ppdisp = findobj('name','pplane8 Display');
-     dud = get(ppdisp,'UserData');
-     aud = get(dud.axes,'UserData');
+     dud = get(ppdisp,'user');
+     aud = get(dud.axes, 'user');
      wind = sud.c.wind(:);
      if (~all(wind == dud.syst.wind(:)))
        dwind = [wind(1); wind(3); -wind(2); -wind(4)];
        aud.DY = [wind(2)-wind(1); wind(4)-wind(3)];
        aud.cwind = dwind - dud.settings.magn*[aud.DY;aud.DY];
-       set(dud.axes,'UserData',aud);
+       set(dud.axes,'user',aud);
      end
      
      arr = dud.arr;
      menull = findobj('tag','null');      
      switch Arrflag
       case 'nullclines'
-%       set([arr.hx;arr.hy;arr.barrows],'vis','on');
+    %  set([arr.hx;arr.hy;arr.barrows],'vis','on');
        set([arr.hx;arr.hy],'vis','on');
        set([arr.lines;arr.arrows],'vis','off');
        set(menull,'enable','on','label','Hide nullclines.');	  
@@ -1723,20 +1722,20 @@ elseif strcmp(action,'proceed')
        set(menull,'enable','on','label','Show nullclines.');	  
      end
      dud.syst.fieldtype = Arrflag;
-     set(ppdisp,'UserData',dud);
+     set(ppdisp,'user',dud);
      
      if ( (NumbFPts ~= dud.syst.npts) | (any(WINvect ~= dud.syst.wind) ) )
        dud.syst.wind = WINvect;			
        dud.syst.npts = NumbFPts;
-       set(ppdisp,'UserData',dud);
+       set(ppdisp,'user',dud);
        pplane8('dirfield',ppdisp);
      end
      figure(ppdisp);
    else
      sud.flag = 1;
-     set(ppset,'UserData',sud);	
+     set(ppset,'user',sud);	
       
-     sud = get(ppset,'UserData');
+     sud = get(ppset,'user');
      %  WINvect = sud.c.wind;
      
      Xname = sud.c.xvar;
@@ -1851,7 +1850,7 @@ elseif strcmp(action,'proceed')
      eval([Xname,'=XxXxXx;'],'err = 1;');
      if err
        sud.flag = 0;
-       set(ppset,'UserData',sud);
+       set(ppset,'user',sud);
        errmsg = ['"',xstr, '" is not a valid variable name in MATLAB.'];
        fprintf('\a')
        errordlg(errmsg,'PPLANE error','on');
@@ -1861,7 +1860,7 @@ elseif strcmp(action,'proceed')
      eval([Yname,'=YyYyYy;'],'err = 1;');
      if err
        sud.flag = 0;
-       set(ppset,'UserData',sud);
+       set(ppset,'user',sud);
        errmsg = ['"',ystr, '" is not a valid variable name in MATLAB.'];
        fprintf('\a')
        errordlg(errmsg,'PPLANE error','on');
@@ -1936,7 +1935,7 @@ elseif strcmp(action,'proceed')
 	 set(perr,'string','?');
        end
        sud.flag = 0;
-       set(ppset,'UserData',sud);
+       set(ppset,'user',sud);
        fprintf('\a')
        errordlg(errmsg,'PPLANE error','on');
        return;
@@ -1957,7 +1956,7 @@ elseif strcmp(action,'proceed')
 	 set(perr,'string','?');
        end
        sud.flag = 0;
-       set(ppset,'UserData',sud);
+       set(ppset,'user',sud);
        fprintf('\a')
        errordlg(errmsg,'PPLANE error','on');
        return;
@@ -1999,7 +1998,7 @@ elseif strcmp(action,'proceed')
      ppdisp = findobj('name','pplane8 Display');
      if (~isempty(ppdisp))
        figure(ppdisp);
-       dud = get(ppdisp,'UserData');
+       dud = get(ppdisp,'user');
        dud.syst = sud.c;
        dud.settings = sud.settings;
        dfcnn = dud.function;
@@ -2012,17 +2011,17 @@ elseif strcmp(action,'proceed')
 	 set(dud.menu(5),'label',ymstr);
 	 menull = findobj('tag','null');
 	 if ~isempty(menull)
-	   delete(get(menull,'UserData'));
-	   set(menull,'UserData',[]);      
+	   delete(get(menull,'user'));
+	   set(menull,'user',[]);      
 	 end
      else
-       ppdisp = figure('name','pplane8 Display',...
+      ppdisp = figure('name','pplane8 Display',...
 		       'NumberTitle','off',...
-		       'interrupt','on',...
+		       'Interruptible','on',...
 		       'visible','off',...
 		       'tag','pplane8');
        pplane8('figdefault',ppdisp);
-       dud = get(ppdisp,'UserData');
+       dud = get(ppdisp,'user');
        dud.syst = sud.c;
        switch dud.syst.name
 	case 'pendulum'
@@ -2154,7 +2153,7 @@ elseif strcmp(action,'proceed')
        
        % Set up the buttons
        
-       stopstr = 'aud = get(gca,''UserData'');aud.stop = 4;set(gca,''UserData'',aud);';
+       stopstr = 'aud = get(gca,''user'');aud.stop = 4;set(gca,''user'',aud);';
        
        dbutt(1) = uicontrol('style','push',...
 			    'pos',[buttl,ppaxb+2*buttsep,buttw,butth],...
@@ -2217,60 +2216,60 @@ elseif strcmp(action,'proceed')
        set(findobj(fmenu,'label','&Print...'),'pos',7);
        merestart = uimenu(fmenu,'label',...
 			  'Restart pplane8',...
-			  'call','pplane8(''restart'')',...
+			  'callback','pplane8(''restart'')',...
 			  'separator','on');
        mequit = uimenu(fmenu,'label','Quit pplane8',...
-		       'call','pplane8(''quit'')','separator','off');
+		       'callback','pplane8(''quit'')','separator','off');
        
        % Edit menu
        
        emenu = findobj(ppdisp,'label','&Edit',...
 		       'pos',2); 
        menu(2) = uimenu(emenu,'label','Zoom in.',...
-			'call','pplane8(''zoomin'')',...
+			'callback','pplane8(''zoomin'')',...
 			'pos',1);
        
        zsqmenu = uimenu(emenu,'label','Zoom in square.',...
-			'call','pplane8(''zoominsq'')',...
+			'callback','pplane8(''zoominsq'')',...
 			'pos',2);
        
-       zbmenu = uimenu(emenu,'label','Zoom back.','call',...
+       zbmenu = uimenu(emenu,'label','Zoom back.','callback',...
 		       'pplane8(''zoomback'')',...
 		       'enable','off','tag','zbmenu',...
 		       'pos',3);
        
        medallsol = uimenu(emenu,'label','Erase all solutions.',...
-			  'call','pplane8(''dallsol'')',...
+			  'callback','pplane8(''dallsol'')',...
 			  'separator','on','pos',4);
        
        medallep = uimenu(emenu,'label','Erase all equilibrium points.',...
-			 'call','pplane8(''dallep'')',...
+			 'callback','pplane8(''dallep'')',...
 			 'separator','off',...
 			 'pos',5);
        
        medallics = uimenu(emenu,'label','Erase all marked initial points.',...
-			 'call','pplane8(''dallics'')',...
+			 'callback','pplane8(''dallics'')',...
 			 'separator','off',...
 			 'pos',6);
        
        medalllev = uimenu(emenu,'label','Erase all level curves.',...
-			  'call','pplane8(''dalllev'')',...
+			  'callback','pplane8(''dalllev'')',...
 			  'separator','off',...
 			  'pos',7);
        
        medall = uimenu(emenu,'label','Erase all graphics objects.',...
-		       'call','pplane8(''dall'')',...
+		       'callback','pplane8(''dall'')',...
 		       'separator','off',...
 		       'pos',8);
        
        medel = uimenu(emenu,'label','Delete a graphics object.',...
-		      'call','pplane8(''delete'')',...
+		      'callback','pplane8(''delete'')',...
 		      'visible','on',...
 		      'pos',9);
        
        menutext = uimenu(emenu,...
 			 'label','Enter text on the Display Window.',...
-			 'call','pplane8(''text'')',...
+			 'callback','pplane8(''text'')',...
 			 'separator','on',...
 			 'pos',10);
        set(findobj(emenu,'label','&Undo'),'separator','on',...
@@ -2290,62 +2289,62 @@ elseif strcmp(action,'proceed')
        
        megraph  = uimenu('label','Graph','visible','off','pos',4);
        menu(3) = uimenu(megraph,'label',[txname,' vs. t'],...
-			'call','pplane8(''plotxy'',1)');
+			'callback','pplane8(''plotxy'',1)');
        
        menu(5) = uimenu(megraph,'label',[tyname,' vs. t'],...
-			'call','pplane8(''plotxy'',2)');
+			'callback','pplane8(''plotxy'',2)');
        
        meplot3 = uimenu(megraph,'label','Both',...
-			'call','pplane8(''plotxy'',3)');
+			'callback','pplane8(''plotxy'',3)');
        
        meplot4 = uimenu(megraph,'label','3 D',...
-			'call','pplane8(''plotxy'',4)');
+			'callback','pplane8(''plotxy'',4)');
        
        meplot5 = uimenu(megraph,'label','Composite',...
-			'call','pplane8(''plotxy'',5)');
+			'callback','pplane8(''plotxy'',5)');
        
        % Solutions menu
        
        solmenu = uimenu('label','Solutions','pos',3);
-       menukey = uimenu(solmenu,'label','Keyboard input.','call',...
+       menukey = uimenu(solmenu,'label','Keyboard input.','callback',...
 			'pplane8(''kbd'')');
        
        mesev   = uimenu(solmenu,'label','Plot several solutions.',...
-			'call','pplane8(''several'')');
+			'callback','pplane8(''several'')');
        
        meeqpt  = uimenu(solmenu,'label','Find an equilibrium point.',...
-			'call','pplane8(''eqpt'')','separator','on');
+			'callback','pplane8(''eqpt'')','separator','on');
        
        menu(4) = uimenu(solmenu,...
 			'label','List computed equilibrium points.',...
-			'call','pplane8(''eqptlist'')');
+			'callback','pplane8(''eqptlist'')');
        
        mestunst= uimenu(solmenu,...
 			'label','Plot stable and unstable orbits.',...
-			'call','pplane8(''stunst'')','interrupt','on');
+			'callback','pplane8(''stunst'')','interrupt','on');
        
        meperiod = uimenu(solmenu,...
 			 'label', 'Find a nearly closed orbit');
-       periodstr = ['ud = get(gcf,''UserData'');',...
+       periodstr = ['ud = get(gcf,''user'');',...
 		    'me = gcbo;',...
-		    'ud.dir = get(me,''UserData'');',...
-		    'set(gcf,''UserData'',ud);',...
+		    'ud.dir = get(me,''user'');',...
+		    'set(gcf,''user'',ud);',...
 		    'pplane8(''periodic'');'];
        dud.period(1) = uimenu(meperiod,...
 			      'label','forward',...
-			      'UserData',1,...
-			      'call', periodstr);
+			      'user',1,...
+			      'callback', periodstr);
        dud.period(2) = uimenu(meperiod,...
 			      'label','backward',...
-			      'UserData',-1,...
-			      'call', periodstr);
+			      'user',-1,...
+			      'callback', periodstr);
        dud.period(3) = uimenu(meperiod,...
 			      'label','in both directions',...
-			      'UserData',0,...
-			      'call', periodstr);
+			      'user',0,...
+			      'callback', periodstr);
        
        nullcall = ['me = gcbo;',...
-		   'dud = get(gcf,''UserData'');',...
+		   'dud = get(gcf,''user'');',...
 		   'handx = [dud.arr.hx; dud.arr.hy];',...	
 		   'handr = [dud.arr.hr; dud.arr.hth];',...
 		   'arron = get(dud.arr.arrows,''vis'');',...
@@ -2369,7 +2368,7 @@ elseif strcmp(action,'proceed')
 		   'end'];
        
        rnullcall = ['me = gcbo;',...
-		    'dud = get(gcf,''UserData'');',...
+		    'dud = get(gcf,''user'');',...
 		    'handx = [dud.arr.hx; dud.arr.hy];',...	    
 		    'handr = [dud.arr.hr; dud.arr.hth];',...	
 		    'lab = get(me,''label'');',...
@@ -2387,17 +2386,17 @@ elseif strcmp(action,'proceed')
 		    'end'];
        
        menunull = uimenu(solmenu,'label','Show nullclines.',...
-			 'call',nullcall,'separator','on','tag','null');
+			 'callback',nullcall,'separator','on','tag','null');
        
        menulevel = uimenu(solmenu,'label','Plot level curves.',...
-			  'call','pplane8(''level'')',...
+			  'callback','pplane8(''level'')',...
 			  'separator','off','tag','level');
        
        if dud.egg
 	 menurnull = uimenu(solmenu,'label','Show polar nullclines.',...
-			    'call',rnullcall,'separator','off','tag','rnull');
+			    'callback',rnullcall,'separator','off','tag','rnull');
 	 metest = uimenu(solmenu,'label','Test case',...
-			 'call','pplane8(''test case'')',...
+			 'callback','pplane8(''test case'')',...
 			 'separator','on','tag','testcase');
 	 
        end      
@@ -2406,24 +2405,24 @@ elseif strcmp(action,'proceed')
        
        menu(1) = uimenu('label','Options','visible','off','pos',5);
        meset   = uimenu(menu(1),'label','Settings.',...
-			'call','pplane8(''settings'')');
+			'callback','pplane8(''settings'')');
        
        mesolve = uimenu(menu(1),'label','Solver.');
        
-       solverstr = ['ud = get(gcf,''UserData'');',...
+       solverstr = ['ud = get(gcf,''user'');',...
 		    'me = gcbo;',...
-		    'meud = get(me,''UserData'');',...
+		    'meud = get(me,''user'');',...
 		    'ud.settings.refine = meud.refine;',...
 		    'ud.settings.tol = meud.tol;',...
 		    'ud.settings.solver = meud.solver;',...
 		    'ud.settings.stepsize = meud.stepsize;',...
 		    'set(ud.solver,''checked'',''off'');',...
 		    'set(me,''checked'',''on'');',...
-		    'set(gcf,''UserData'',ud);',...
+		    'set(gcf,''user'',ud);',...
 		    'ppset = findobj(''name'',''pplane8 Setup'');',...
-		    'sud = get(ppset,''UserData'');',...
+		    'sud = get(ppset,''user'');',...
 		    'sud.settings = ud.settings;',...
-		    'set(ppset,''UserData'',sud);',...
+		    'set(ppset,''user'',sud);',...
 		    'pplane8(''settings'');'];
        
        solver = dud.settings.solver;
@@ -2520,44 +2519,44 @@ elseif strcmp(action,'proceed')
        
        dud.solver(1) = uimenu(mesolve,'label','Dormand Prince',...
 			      'checked',dpch,...
-			      'call',solverstr,'UserData',dpset);
+			      'callback',solverstr,'user',dpset);
        
        dud.solver(2) = uimenu(mesolve,'label','Runge-Kutta 4',...
 			      'checked',rk4ch,...
-			      'call',solverstr,'UserData',rk4set);
+			      'callback',solverstr,'user',rk4set);
        
        dud.solver(3) = uimenu(mesolve,'label','ode45',...
 			      'checked',ode45ch,...
 			      'separator','on',...
-			      'call',solverstr,'UserData',ode45set);
+			      'callback',solverstr,'user',ode45set);
        
        dud.solver(4) = uimenu(mesolve,'label','ode23',...
 			      'checked',ode23ch,...
-			      'call',solverstr,'UserData',ode23set);
+			      'callback',solverstr,'user',ode23set);
        
        dud.solver(5) = uimenu(mesolve,'label','ode113',...
 			      'checked',ode113ch,...
-			      'call',solverstr,'UserData',ode113set);
+			      'callback',solverstr,'user',ode113set);
        
        dud.solver(6) = uimenu(mesolve,'label','ode15s',...
 			      'checked',ode15sch,...
-			      'call',solverstr,'UserData',ode15sset);
+			      'callback',solverstr,'user',ode15sset);
        
        dud.solver(7) = uimenu(mesolve,'label','ode23s',...
 			      'checked',ode23sch,...
-			      'call',solverstr,'UserData',ode23sset);
+			      'callback',solverstr,'user',ode23sset);
        
        dud.solver(8) = uimenu(mesolve,'label','ode23t',...
 			      'checked',ode23tch,...
-			      'call',solverstr,'UserData',ode23tset);
+			      'callback',solverstr,'user',ode23tset);
        
        dud.solver(9) = uimenu(mesolve,'label','ode23tb',...
 			      'checked',ode23tbch,...
-			      'call',solverstr,'UserData',ode23tbset);
+			      'callback',solverstr,'user',ode23tbset);
        
        plotch = [
-	   'dud = get(gcf,''UserData'');',...
-	   'aud = get(dud.axes,''UserData'');',...
+	   'dud = get(gcf,''user'');',...
+	   'aud = get(dud.axes,''user'');',...
 	   'if aud.plot,',...
 	   '   aud.plot = 0;',...
 	   '   set(gcbo,''label'',''Plot while computing'');',...
@@ -2565,33 +2564,33 @@ elseif strcmp(action,'proceed')
 	   '   aud.plot = 1;',...
 	   '   set(gcbo,''label'',''Do not plot while computing'');',...
 	   'end,',...
-	   'set(dud.axes,''UserData'',aud);'];
+	   'set(dud.axes,''user'',aud);'];
        
        medir = uimenu(menu(1),'label','Solution direction.');
        
-       directionstr = ['ud = get(gcf,''UserData'');',...
+       directionstr = ['ud = get(gcf,''user'');',...
 		       'me = gcbo;',...
-		       'ud.dir = get(me,''UserData'');',...
+		       'ud.dir = get(me,''user'');',...
 		       'set(ud.direction,''checked'',''off'');',...
 		       'set(me,''checked'',''on'');',...
-		       'set(gcf,''UserData'',ud);'];
+		       'set(gcf,''user'',ud);'];
        
        dud.direction(1) = uimenu(medir,'label','Both',...
 				 'checked','on',...
-				 'UserData',0,...
-				 'call',directionstr);
+				 'user',0,...
+				 'callback',directionstr);
        dud.dir = 0;
        
        dud.direction(2) = uimenu(medir,'label','Forward',...
-				 'UserData',1,...
-				 'call',directionstr);
+				 'user',1,...
+				 'callback',directionstr);
        
        dud.direction(3) = uimenu(medir,'label','Back',...
-				 'UserData',-1,...
-				 'call',directionstr);
+				 'user',-1,...
+				 'callback',directionstr);
        
        
-       markstr = ['ud = get(gcf,''UserData'');',...
+       markstr = ['ud = get(gcf,''user'');',...
 		  'me = gcbo;',...
 		  'chkd = get(me,''checked'');',...
 		  'if strcmp(chkd,''on''),',...
@@ -2601,22 +2600,22 @@ elseif strcmp(action,'proceed')
 		  '  set(me,''checked'',''on'');',...
 		  '  ud.markflag = 1;',...
 		  'end,',...
-		  'set(gcf,''UserData'',ud);'];
+		  'set(gcf,''user'',ud);'];
        
        dud.markflag = 0;
        dud.mark = uimenu(menu(1),'label','Mark initial points.',...
 		       'checked','off',...
-		       'call',markstr);
+		       'callback',markstr);
 
        meexportdata = uimenu(menu(1),'label','Export solution data.',...
-			      'call','pplane8(''export'')',...
+			      'callback','pplane8(''export'')',...
 			      'separator','off','tag','dexp');
 	
        meplot = uimenu(menu(1),'label','Do not plot while computing',...
-		       'call',plotch,'separator','on');
+		       'callback',plotch,'separator','on');
        
        menu(6) = uimenu(menu(1),'label','Make the Display Window inactive.',...
-			'call','pplane8(''hotcold'')','separator','on');
+			'callback','pplane8(''hotcold'')','separator','on');
        
        dud.menu = menu;
        
@@ -2624,7 +2623,7 @@ elseif strcmp(action,'proceed')
        
        set(findobj(gcf,'label','&View'),'pos',6);
        set(findobj(gcf,'label','&Figure Toolbar'),...
-	   'call','pplane8(''showbar'')');
+	   'callback','pplane8(''showbar'')');
        
        set(0,'showhiddenhandles',hhsetup);
        
@@ -2706,7 +2705,7 @@ elseif strcmp(action,'proceed')
      dud.ics = [];      % Marked initial points.
      dud.wmat = [];
      dud.color = sud.color;
-     set(ppdisp,'UserData',dud);
+     set(ppdisp,'user',dud);
      if strcmp(dud.syst.fieldtype,'nullclines')
        menunull = findobj('tag','null');      
        set(menunull,'label','Hide nullclines.');
@@ -2729,7 +2728,7 @@ elseif strcmp(action,'proceed')
      ud.stop = 0;
      ud.gstop = 1;
      ud.plot = 1;
-     set(dud.axes,'UserData',ud);
+     set(dud.axes,'user',ud);
      tc = findobj('tag','testcase');
      if ~isempty(tc)    
        if strcmp(dud.syst.name,'default system')
@@ -2758,13 +2757,13 @@ elseif strcmp(action,'linear')
    
    % Get the information from pplane8 Equilibrium ...
    
-   sud = get(ppeqpt,'UserData');
+   sud = get(ppeqpt,'user');
    WINvect = [-1 1 -1 1];
    jac = sud.jac;
    type = sud.type;
    vectors = sud.vectors;
    ppdisp = findobj('name','pplane8 Display');
-   pdud = get(ppdisp,'UserData');
+   pdud = get(ppdisp,'user');
    settings = pdud.settings;
    system = sud.system;
    
@@ -2774,18 +2773,18 @@ elseif strcmp(action,'linear')
    pplin= findobj('name','pplane8 Linearization');
    if (~isempty(pplin))
       figure(pplin);
-      dud = get(pplin,'UserData');
+      dud = get(pplin,'user');
       dud.syst = system;
       dud.settings = settings;
       dfcn = dud.function;
    else
       pplin = figure('name','pplane8 Linearization',...
-         'NumberTitle','off',...
+         'numbertitle','off',...
          'interrupt','on',...
          'visible','off',...
          'tag','pplane8');
       pplane8('figdefault',pplin);
-      dud = get(pplin,'UserData');
+      dud = get(pplin,'user');
       dud.dir = 0;
       dud.syst = system;
       dud.settings = settings;
@@ -2865,7 +2864,7 @@ elseif strcmp(action,'linear')
       
       axpos = r*[ppaxl,ppaxb,ppaxw,ppaxh];
       
-      stopstr = 'aud = get(gca,''UserData'');aud.stop = 4;set(gca,''UserData'',aud);';
+      stopstr = 'aud = get(gca,''user'');aud.stop = 4;set(gca,''user'',aud);';
       
       stoppos = [axpos(1)+axpos(3)-r*10, axpos(2)+axpos(4)+r*10, r*40,fs+10*r];    
       
@@ -2902,25 +2901,25 @@ elseif strcmp(action,'linear')
       set(findobj(fmenu,'label','&Print...'),'pos',8);
       
       mequit = uimenu(fmenu,'label','Quit pplane8',...
-	  'call','pplane8(''quit'')','separator','on','pos',9);
+	  'callback','pplane8(''quit'')','separator','on','pos',9);
   
       % View menu
       
       set(findobj(gcf,'label','&Figure Toolbar'),...
-	  'call','pplane8(''showbar'')');
+	  'callback','pplane8(''showbar'')');
       
       % Solutions menu
       
       solmenu = uimenu('label','Solutions','pos',3);
       
-      menukey = uimenu(solmenu,'label','Keyboard input.','call',...
+      menukey = uimenu(solmenu,'label','Keyboard input.','callback',...
          'pplane8(''kbd'')','vis','on');
       
       mesev   = uimenu(solmenu,'label','Plot several solutions.',...
-         'call','pplane8(''several'')');
+         'callback','pplane8(''several'')');
       
       
-      fundcall = ['dud = get(gcf,''UserData'');',...      
+      fundcall = ['dud = get(gcf,''user'');',...      
 		  'col = dud.color.sep;',...
 		  'vect = dud.vectors;',...
 		  'h = zeros(1,2);',...
@@ -2928,11 +2927,11 @@ elseif strcmp(action,'linear')
 		  'h(2) = plot(2*[vect(1,2),-vect(1,2)],2*[vect(2,2),-vect(2,2)]);',...
 		  'set(h,''color'',col);',...	    
 		  'dud.solhand = [dud.solhand;h(:)];'...
-		  'set(gcf,''UserData'',dud);'];
+		  'set(gcf,''user'',dud);'];
       
-      dud.menu = uimenu(solmenu,'call',fundcall);
+      dud.menu = uimenu(solmenu,'callback',fundcall);
       
-      markstr = ['ud = get(gcf,''UserData'');',...
+      markstr = ['ud = get(gcf,''user'');',...
 		 'me = gcbo;',...
 		 'chkd = get(me,''checked'');',...
 		 'if strcmp(chkd,''on''),',...
@@ -2942,7 +2941,7 @@ elseif strcmp(action,'linear')
 		 '  set(me,''checked'',''on'');',...
 		 '  ud.markflag = 1;',...
 		 'end,',...
-		 'set(gcf,''UserData'',ud);'];
+		 'set(gcf,''user'',ud);'];
       
       dud.markflag = pdud.markflag;
       chkd = 'off';
@@ -2951,31 +2950,31 @@ elseif strcmp(action,'linear')
       end
       dud.mark = uimenu(solmenu,'label','Mark initial points.',...
 			'checked',chkd,...
-			'call',markstr);
+			'callback',markstr);
       % Edit menu
       
       emenu = findobj(gcf,'label','&Edit');  
       
       medallsol = uimenu(emenu,'label','Erase all solutions.',...
-			 'call','pplane8(''dallsol'')',...
+			 'callback','pplane8(''dallsol'')',...
 			 'pos',1);
       
       medallics = uimenu(emenu,'label','Erase all marked initial points.',...
-			 'call','pplane8(''dallics'')',...
+			 'callback','pplane8(''dallics'')',...
 			 'separator','off',...
 			 'pos',2);
        
       medall = uimenu(emenu,'label','Erase all graphics objects.',...
-		       'call','pplane8(''dall'')',...
+		       'callback','pplane8(''dall'')',...
 		       'separator','off',...
 		       'pos',3);
       medel = uimenu(emenu,'label','Delete a graphics object.',...
-		     'call','pplane8(''delete'')',...
+		     'callback','pplane8(''delete'')',...
 		     'visible','on',...
 		     'pos',4);
       
       menutext = uimenu(emenu,'label','Enter text on the Display Window.',...
-			'call','pplane8(''text'')',...
+			'callback','pplane8(''text'')',...
 			'pos',5);
       set(findobj(emenu,'label','&Undo'),'separator','on',...
 			'pos',6);
@@ -2995,11 +2994,13 @@ elseif strcmp(action,'linear')
       optmenu = uimenu('label','Options','visible','off');
       
       mehc = uimenu(optmenu,'label','Make the Display Window inactive.',...
-         'call','pplane8(''hotcold'')','separator','on');
+         'callback','pplane8(''hotcold'')','separator','on');
 
       set(0,'showhiddenhandles',hhsetup);
       
-      set(pplin,'WindowButtonDownFcn',['pplane8(''down'',',num2str(pplin),')']);
+      % NB! Compatibility fix for new MATLAB versions (R2017-...)
+      pplin_nr = pplin.Number;
+      set(pplin,'WindowButtonDownFcn',['pplane8(''down'',',num2str(pplin_nr),')']);
       hh1 = [dud.axes,dud.title.axes];
       set(hh1,'units','norm');
       set(dud.axes,'visible','on');
@@ -3097,8 +3098,8 @@ elseif strcmp(action,'linear')
 		    'color',dud.color.eqpt,...
 		    'markersize',20,...
 		    'marker','.');
-   set(dud.axes,'UserData',ud);
-   set(pplin,'UserData',dud);
+   set(dud.axes,'user',ud);
+   set(pplin,'user',dud);
    ppkbd = findobj('name','pplane8 Keyboard input','vis','on');
    if ~isempty(ppkbd),pplane8('kbd'),end
    pplane8('dirfield',pplin);		
@@ -3113,7 +3114,7 @@ elseif strcmp(action,'dirfield')
    
    disph = input1;   % This could be ppdisp or pplin.
    
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    color = dud.color;
    
    dfcn = dud.function;
@@ -3121,7 +3122,7 @@ elseif strcmp(action,'dirfield')
    WINvect = dud.syst.wind;
    settings = dud.settings;
    notice = dud.notice;
-   if notice ~= 0
+   if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4)=nstr(2:5);
       nstr{5,1} = 'Computing the field elements.';
@@ -3388,13 +3389,13 @@ set([hx;hy],'vis','on');
    elseif strcmp(get(mernull,'label'),'Delete polar nullclines.')
       set([hr;hth],'vis','on');
    end
-   if notice ~= 0
+   if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = 'Ready.';
       set(notice,'string',nstr);
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    axis([Dxint,Dyint]);  
    
 elseif strcmp(action,'hotcold')
@@ -3403,7 +3404,7 @@ elseif strcmp(action,'hotcold')
    % Display Window active or inactive.
    
    ppdisp = gcf;
-   dud = get(ppdisp,'UserData');
+   dud = get(ppdisp,'user');
    nstr = get(dud.notice,'string');
    nstr(1:4) = nstr(2:5);
    mehc = dud.menu(6);
@@ -3433,7 +3434,7 @@ elseif strcmp(action,'down')
     pplane8('zoomsqd');
     return
   end
-  dud = get(disph,'UserData');
+  dud = get(disph,'user');
   ax = dud.axes;
   ch = findobj('type','uicontrol','enable','on');
   set(ch,'enable','inactive');
@@ -3445,14 +3446,14 @@ elseif strcmp(action,'down')
   if dud.markflag
     h = plot(initpt(1),initpt(2),'.k');
     dud.ics = [dud.ics,h];
-    set(disph,'UserData',dud);
+    set(disph,'user',dud);
   end
   pplane8('solution',initpt,disph);
   set(disph,'WindowbuttonDownFcn',wbdf);
   %  set([ch;mh],'enable','on');
   set(ch,'enable','on');
   notice = dud.notice;
-  if notice ~= 0
+  if notice ~=0
     nstr = get(notice,'string');
     nstr(1:4) = nstr(2:5);
     nstr{5,1} = 'Ready.';
@@ -3471,9 +3472,9 @@ elseif strcmp(action,'several')
    %  set(mh,'enable','off')
    wbdf = get(disph,'WindowbuttonDownFcn');
    set(disph,'WindowbuttonDownFcn','');
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
-   if notice ~= 0
+   if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = 'Pick initial points with the mouse. Enter "Return" when finished.';
@@ -3486,7 +3487,7 @@ elseif strcmp(action,'several')
       initpt = [X(k),Y(k)];
       pplane8('solution',initpt,disph);
    end
-   if notice ~= 0
+   if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = 'Ready.';
@@ -3507,7 +3508,7 @@ elseif strcmp(action,'test case')
       pplane8('solution',initpt,ppdisp);
    end  
    pplane8('solution',[1,-1],ppdisp);
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    nstr = get(dud.notice,'string');
    nstr(1:4) = nstr(2:5);
    nstr{5,1} = 'Ready.';
@@ -3520,7 +3521,7 @@ elseif strcmp(action,'solution')
    % solutions.  It also stores the data as appropriate.
    
    disph = input2;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    tcol = dud.color.temp;
    pcol = dud.color.orb;
    notice = dud.notice;
@@ -3532,7 +3533,7 @@ elseif strcmp(action,'solution')
    refine = settings.refine;
    ssize = settings.stepsize;
    tol = settings.tol;
-   ud = get(dud.axes,'UserData');
+   ud = get(dud.axes,'user');
    %  rtol = tol;
    atol = tol*ud.DY*1e-4';
    
@@ -3606,7 +3607,7 @@ elseif strcmp(action,'solution')
    
    if intplus(2)>intplus(1)
      cflag = cflag + 1;
-     if notice ~= 0
+     if notice ~=0
        nstr = get(notice,'string');
        nstr(1:4) = nstr(2:5);
        nstr{5} = ['The forward orbit from',ptstr];
@@ -3615,13 +3616,13 @@ elseif strcmp(action,'solution')
      drawnow				
      
      [tp,xp] = feval(solh,dfh,intplus,initpt,opt);
-     aud = get(ppdispa,'UserData');
+     aud = get(ppdispa,'user');
      hnew1 = aud.line;
    end		
    
    if intminus(2) < intminus(1)
      cflag = cflag + 2;
-     if notice ~= 0	
+     if notice ~=0	
        nstr = get(notice,'string');
        nstr(1:4) = nstr(2:5);
        nstr{5} = ['The backward orbit from',ptstr];
@@ -3629,7 +3630,7 @@ elseif strcmp(action,'solution')
      end
      drawnow
      [tm,xm] = feval(solh,dfh,intminus,initpt,opt);
-     aud = get(ppdispa,'UserData');
+     aud = get(ppdispa,'user');
      hnew2 = aud.line;
      
      set(stopbutt,'vis','off');
@@ -3661,7 +3662,7 @@ elseif strcmp(action,'solution')
       set(hnew2,'erase','normal');
       dud.solhand = [dud.solhand;hnew2];
    end	 % switch cflag
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    
 elseif strcmp(action,'kcompute')
    
@@ -3669,16 +3670,16 @@ elseif strcmp(action,'kcompute')
    % button on the pplane8 Keyboard figure.
    
    compute = 1;
-   kh = get(gcf,'UserData');
+   kh = get(gcf,'user');
    ppdisp = kh.fig;
    if (isempty(ppdisp))
       pplane8('confused');
    end
-   dud = get(ppdisp,'UserData');
+   dud = get(ppdisp,'user');
    ppdispa = dud.axes;
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    ppset = findobj('name','pplane8 Setup');
-   sud = get(ppset,'UserData');
+   sud = get(ppset,'user');
    ch = findobj('type','uicontrol','enable','on');
    set(ch,'enable','inactive');
    set(ppdisp,'WindowbuttonDownFcn','');
@@ -3723,7 +3724,7 @@ elseif strcmp(action,'kcompute')
          compute = 0;
       end
       aud.gstop = 0;
-      set(ppdispa,'UserData',aud);
+      set(ppdispa,'user',aud);
    else
       initpt = [xvalue,yvalue];
       if (length(initpt) ~= 2)
@@ -3737,11 +3738,11 @@ elseif strcmp(action,'kcompute')
        figure(ppdisp)
        h = plot(initpt(1),initpt(2),'.k');
        dud.ics = [dud.ics,h];
-       set(ppdisp,'UserData',dud);
+       set(ppdisp,'user',dud);
      end
      pplane8('solution',initpt,ppdisp);
    end
-   if dud.notice ~= 0
+   if dud.notice ~=0
      nstr = get(dud.notice,'string');
      nstr(1:4) = nstr(2:5);
      nstr{5} = 'Ready.';
@@ -3751,7 +3752,7 @@ elseif strcmp(action,'kcompute')
    set(ch,'enable','on');
    set(ppdisp,'WindowbuttonDownFcn','pplane8(''down'')');
    aud.gstop = 1;
-   set(ppdispa,'UserData',aud);
+   set(ppdispa,'user',aud);
    
    
 elseif strcmp(action,'kbd')
@@ -3761,7 +3762,7 @@ elseif strcmp(action,'kbd')
    % initial values using the keyboard.
    
    ppdisp = gcf;  % The figure to be plotted in.
-   dud = get(ppdisp,'UserData');
+   dud = get(ppdisp,'user');
    Xname = dud.syst.xvar;
    Yname = dud.syst.yvar;
    xnstr = ['The initial value of ',Xname,' = '];
@@ -3774,7 +3775,7 @@ elseif strcmp(action,'kbd')
          
    ppkbd = figure('name','pplane8 Keyboard input',...
 		  'vis','off',...
-		  'NumberTitle','off','tag','pplane8');
+		  'numbertitle','off','tag','pplane8');
    
    pplane8('figdefault',ppkbd);
    set(ppkbd,'menubar','none');
@@ -3902,7 +3903,7 @@ elseif strcmp(action,'kbd')
    set(kbd.comp,'pos',compwind);
    set(kbd.close,'pos',clwind);
    speccall = [
-       'ud = get(gcf,''UserData'');',...
+       'ud = get(gcf,''user'');',...
        'if get(gcbo,''value''),',...
        '  set([ud.t0,ud.t,ud.tf,ud.tname,ud.tval],''enable'',''on'');',...
        'else,',...
@@ -3915,7 +3916,7 @@ elseif strcmp(action,'kbd')
    
    set([kbd.tval,kbd.t0],'string','0');
    set(kbd.spec,'value',0);
-   set(ppkbd,'UserData',kbd,'vis','on');
+   set(ppkbd,'user',kbd,'vis','on');
    set([kbd.t0,kbd.t,kbd.tf,kbd.tname,kbd.tval],'enable','off')
    set(findobj(ppkbd,'type','uicontrol'),'units','normal');
    edith = findobj(ppkbd,'style','edit');
@@ -3927,7 +3928,7 @@ elseif strcmp(action,'eqpt')
   % Find and classify equilibrium points.
   
   ppdisp = findobj('name','pplane8 Display');
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   col = dud.color.eqpt;
   dfcn = dud.function;
   dbutt = dud.butt;
@@ -4065,7 +4066,7 @@ elseif strcmp(action,'eqpt')
    if (isempty(ppeqpt))
      ppeqpt = figure('vis','off','resize','on',...
  		    'name','pplane8 Equilibrium point data',...
- 		    'NumberTitle','off','tag','pplane8');
+ 		    'numbertitle','off','tag','pplane8');
      pplane8('figdefault',ppeqpt);
      set(ppeqpt,'menubar','none');
 
@@ -4078,7 +4079,7 @@ elseif strcmp(action,'eqpt')
  			   'call','pplane8(''linear'')');
    else
      figure(ppeqpt);
-     ud = get(ppeqpt,'UserData');
+     ud = get(ppeqpt,'user');
      set(ppeqpt,'vis','off');
      set(findobj(ppeqpt,'type','uicontrol'),'units','pixels');
      set(ud.eptext,'string',infostr);
@@ -4089,7 +4090,7 @@ elseif strcmp(action,'eqpt')
    ud.system = dud.syst;
    ud.settings = dud.settings;
    ud.color = dud.color;
-   set(ppeqpt,'UserData',ud);
+   set(ppeqpt,'user',ud);
    left = 5; nudge = 3;
    ext = get(ud.eptext,'extent');
    n = size(infostr,1);
@@ -4126,16 +4127,16 @@ elseif strcmp(action,'eqpt')
    nstr(1:4) = nstr(2:5);
    nstr{5} = 'Ready.';
    set(dud.notice,'string',nstr);
-   set(ppdisp,'UserData',dud);
+   set(ppdisp,'user',dud);
     
 elseif strcmp(action,'stunst')
    
    ppdisp = findobj('name','pplane8 Display');
-   dud = get(ppdisp,'UserData');
+   dud = get(ppdisp,'user');
    ecol = dud.color.eqpt;
    scol = dud.color.sep;
    ppdispa = dud.axes;
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    DY = aud.DY;
    settings = dud.settings;
    dfcn = dud.function;
@@ -4210,7 +4211,7 @@ elseif strcmp(action,'stunst')
    lm=lm/max(lm);
    lm = (max([lm,0.2*ones(size(lm))]'))';
    offs = offset./lm;
-   ud = get(dud.axes,'UserData');
+   ud = get(dud.axes,'user');
    atol = tol*ud.DY*1e-4';
    options = odeset('OutputFcn',@ppout,'Refine',refine,...
        'RelTol',tol,'Abstol',atol);
@@ -4271,7 +4272,7 @@ elseif strcmp(action,'stunst')
    	  
 %   [tp,Xp] = ppdp45(dfcn,[0,-1e6],w,ppdisp);
    set(stopbutt,'enable','off');
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    newhand(1) = aud.line;
    X1=[z';Xp];
    x1 = [X1,[NaN;tp]];
@@ -4288,7 +4289,7 @@ elseif strcmp(action,'stunst')
 %   [tp,Xp] = ppdp45(dfcn,[0,-1e6],w,ppdisp);
    set(stopbutt,'enable','off');
    
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    newhand(2) = aud.line;
    
    X2=[z';Xp];
@@ -4306,7 +4307,7 @@ elseif strcmp(action,'stunst')
    [tp,Xp] = feval(solh,dfh,int,w,opt);
    set(stopbutt,'enable','off');
    
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    newhand(3) = aud.line;
    X3=[z';Xp];
    x3 = [X3,[NaN;tp]];
@@ -4322,7 +4323,7 @@ elseif strcmp(action,'stunst')
    
    set(stopbutt,'vis','off');
    
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    newhand(4) = aud.line;
    X4=[z';Xp];
    x4 = [X4,[NaN;tp]];
@@ -4340,7 +4341,7 @@ elseif strcmp(action,'stunst')
    nstr(1:4) = nstr(2:5);
    nstr{5} = 'Ready.';
    set(dud.notice,'string',nstr);
-   set(gcf,'UserData',dud);
+   set(gcf,'user',dud);
    
 elseif strcmp(action,'zoomin')
    
@@ -4350,7 +4351,7 @@ elseif strcmp(action,'zoomin')
    set(gcf,'WindowButtonDownFcn','pplane8(''zoom'')',...
       'WindowButtonUpFcn','1;','inter','on');
    set(gca,'inter','on');
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    nstr = get(dud.notice,'string');
    nstr(1:4) = nstr(2:5);
    nstr{5} = ['Pick a new display rectangle by clicking and ',...
@@ -4360,9 +4361,9 @@ elseif strcmp(action,'zoomin')
 elseif strcmp(action,'zoom')
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    axh = dud.axes;
-   aud = get(axh,'UserData');
+   aud = get(axh,'user');
    DY = aud.DY;
    w = dud.syst.wind;
    q1 = get(disph,'currentpoint');
@@ -4389,8 +4390,8 @@ elseif strcmp(action,'zoom')
    aud.DY = DY;
    dwind = [WINvect(1); WINvect(3); -WINvect(2); -WINvect(4)];
    aud.cwind = dwind - dud.settings.magn*[aud.DY;aud.DY];
-   set(axh,'UserData',aud);	
-   set(disph,'UserData',dud);
+   set(axh,'user',aud);	
+   set(disph,'user',dud);
    set(disph,'WindowButtonDownFcn','pplane8(''down'')',...
       'WindowButtonUpFcn','');
    pplane8('dirfield',disph);
@@ -4398,14 +4399,14 @@ elseif strcmp(action,'zoom')
    if isempty(ppset)
       pplane8('confused');
    else
-      sud = get(ppset,'UserData');
+      sud = get(ppset,'user');
       sud.c.wind = WINvect;
       sud.o.wind = WINvect;
       set(sud.h.wind(1),'string',num2str(WINvect(1)));
       set(sud.h.wind(2),'string',num2str(WINvect(2)));
       set(sud.h.wind(3),'string',num2str(WINvect(3)));
       set(sud.h.wind(4),'string',num2str(WINvect(4)));
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
    end
    
 elseif strcmp(action,'showbar')
@@ -4435,7 +4436,7 @@ elseif strcmp(action,'showbar')
      otherwise
       delete(findobj(sbfig,'tooltipstr','Zoom Out'));
       delete(findobj(sbfig,'tooltipstr','Zoom In'));
-      fud = get(sbfig,'UserData');
+      fud = get(sbfig,'user');
       switch fud.type
        case {4, 5}
 	set(findobj(sbfig,'tooltipstr','Rotate 3D'),'vis','on');
@@ -4469,7 +4470,7 @@ elseif strcmp(action,'dall')
    % 'dall' is the callback for the Erase all graphics objects.  
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
    kk = find(ishandle(dud.solhand));    
    delete(dud.solhand(kk));
@@ -4484,10 +4485,10 @@ elseif strcmp(action,'dall')
    kk = find(ishandle(dud.ics));    
    delete(dud.ics(kk));
    dud.ics = [];
-   if notice ~= 0
+   if notice ~=0
       set(dud.butt(1),'enable','off');
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
   
    
 elseif strcmp(action,'dallsol')
@@ -4495,61 +4496,61 @@ elseif strcmp(action,'dallsol')
    % 'dallsol' is the callback for the Erase all solutions option.  
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
    kk = find(ishandle(dud.solhand));    
    delete(dud.solhand(kk));
    dud.solhand = [];
-   if notice ~= 0
+   if notice ~=0
       set(dud.butt(1),'enable','off');
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    
 elseif strcmp(action,'dallep')
    
    % 'dallep' is the callback for the Erase all equilibrium points option.  
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
    kk = find(ishandle(dud.ephand));  
    delete(dud.ephand(kk));
    dud.ephand = [];
    dud.eqpts = [];
-   if notice ~= 0
+   if notice ~=0
       set(dud.butt(1),'enable','off');
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    
 elseif strcmp(action,'dalllev')
    
    % 'dalllev' is the callback for the Erase all level curves option.  
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
    kk = find(ishandle(dud.contours));
    delete(dud.contours(kk));
    dud.contours = [];
-   if notice ~= 0
+   if notice ~=0
       set(dud.butt(1),'enable','off');
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    
 elseif strcmp(action,'dallics')
    
    % 'dallics' is the callback for the Erase all marked initial cond.
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    notice = dud.notice;
    kk = find(ishandle(dud.ics));
    delete(dud.ics(kk));
    dud.ics = [];
-   if notice ~= 0
+   if notice ~=0
       set(dud.butt(1),'enable','off');
    end
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    
 elseif strcmp(action,'newton')
    
@@ -4649,7 +4650,7 @@ elseif strcmp(action,'settings')
    % up the pplane8 Settings window, which allows the user to interactively
    % change several parameters that govern the behaviour of the program.
    
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    data.settings = dud.settings;
    solver = dud.settings.solver;
    left = 2; nudge = 3; varl = 60;
@@ -4659,7 +4660,7 @@ elseif strcmp(action,'settings')
    end
    
    setfig = figure('name','pplane8 Settings',...
-		   'NumberTitle','off',...
+		   'numbertitle','off',...
 		   'tag','pplane8','vis','off');
    
    pplane8('figdefault',setfig);
@@ -4673,11 +4674,11 @@ elseif strcmp(action,'settings')
       'string',['Settings for ',dud.settings.solver]);
    
    nstepcall =[
-      'data = get(gcf,''UserData'');',...
+      'data = get(gcf,''user'');',...
          'ss = max(round(str2num(get(data.nstep,''string''))),0);',...
          'data.settings.refine = ss;',...
          'set(data.nstep,''string'',num2str(ss));',...
-         'set(gcf,''UserData'',data);'];
+         'set(gcf,''user'',data);'];
    
    nstep = uicontrol('style','text','horiz','left',...
       'string','Number of plot steps per computation step:  ');
@@ -4687,17 +4688,17 @@ elseif strcmp(action,'settings')
    if strcmp(solver,'Runge-Kutta 4')
      rtolstr = 'Step size: ';
      rtolentry = num2str(data.settings.stepsize);
-     rtolcall =['data = get(gcf,''UserData'');',...
+     rtolcall =['data = get(gcf,''user'');',...
 	   'data.settings.stepsize = str2num(get(data.rtol,''string''));',...
 	   'set(data.rtol,''string'',num2str(data.settings.stepsize));',...
-	   'set(gcf,''UserData'',data);'];
+	   'set(gcf,''user'',data);'];
    else
      rtolstr = 'Relative error tolerance: ';
      rtolentry = num2str(data.settings.tol);
-     rtolcall =['data = get(gcf,''UserData'');',...
+     rtolcall =['data = get(gcf,''user'');',...
 	   'data.settings.tol = str2num(get(data.rtol,''string''));',...
 	   'set(data.rtol,''string'',num2str(data.settings.tol));',...
-	   'set(gcf,''UserData'',data);'];
+	   'set(gcf,''user'',data);'];
    end
    rtol = uicontrol('style','text','horiz','left',...
        'string',rtolstr); 
@@ -4705,18 +4706,18 @@ elseif strcmp(action,'settings')
       'string',rtolentry);
    
    kk = 1+2*data.settings.magn;
-   magcall = ['data = get(gcf,''UserData'');',...
+   magcall = ['data = get(gcf,''user'');',...
          'mag = 	(str2num(get(data.mag,''string''))-1)/2;',...
          'data.settings.magn = max(0,mag);',...
-         'set(gcf,''UserData'',data);'];
+         'set(gcf,''user'',data);'];
    
-    speedcall = ['data = get(gcf,''UserData'');',...
+    speedcall = ['data = get(gcf,''user'');',...
 		 'me = data.speed;',...
 		 'val = round(get(me,''value''));',...
 		 'set(me,''value'',val);',...
 		 'set(data.sp.val,''string'',num2str(val));',...
 		 'data.settings.speed = val;',...
-		 'set(gcf,''UserData'',data);'];
+		 'set(gcf,''user'',data);'];
     data.speed = uicontrol('style','slider',...
 			   'string','Steps per second.',...
 			   'min',2,...
@@ -4831,7 +4832,7 @@ elseif strcmp(action,'settings')
    set(chb,'pos',[chbl,bb,buttw,ht]);
    
    
-   set(setfig,'UserData',data);
+   set(setfig,'user',data);
    set(setfig,'units','normal');
    set(findobj(setfig,'type','uicontrol'),'units','normal');
    set(setfig,'vis','on','resize','on');
@@ -4850,29 +4851,29 @@ elseif strcmp(action,'setchange')
    % 'setchange' is the callback for the Change button 
    % on the pplane8 Settings window.
    
-   data = get(gcf,'UserData');
+   data = get(gcf,'user');
    settings = data.settings;
    ppdisp = findobj('name','pplane8 Display');
-   dud = get(ppdisp,'UserData');
+   dud = get(ppdisp,'user');
    if isempty(ppdisp)
       pplane8('confused');
    else
       dud.settings = settings;
-      set(ppdisp,'UserData',dud);
+      set(ppdisp,'user',dud);
       WINvect = dud.wmat;
       WINvect = WINvect(size(WINvect,1),:);
       dwind = [WINvect(1); WINvect(3); -WINvect(2); -WINvect(4)];
-      aud = get(dud.axes,'UserData');  
+      aud = get(dud.axes,'user');  
       aud.cwind = dwind - dud.settings.magn*[aud.DY;aud.DY];
-      set(dud.axes,'UserData',aud);
+      set(dud.axes,'user',aud);
    end
    ppset = findobj('name','pplane8 Setup');
    if isempty(ppset)
       pplane8('confused');
    else
-      sud = get(ppset,'UserData');
+      sud = get(ppset,'user');
       sud.settings = settings;
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
    end	
    close
    
@@ -4883,7 +4884,7 @@ elseif strcmp(action,'delete')
    % on the menu.
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    arr = dud.arr;
    lv = get(arr.lines,'vis');
    av = get(arr.arrows,'vis');
@@ -4905,7 +4906,7 @@ elseif strcmp(action,'delete')
    set(disph,'WindowButtonDownFcn','');
    trjh = dud.solhand;
    notice = dud.notice;
-   if notice ~= 0   % Display window
+   if notice ~=0   % Display window
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5} = 'Select a graphics object with the mouse.';
@@ -4918,7 +4919,7 @@ elseif strcmp(action,'delete')
    axh = dud.axes;
    hh = get(dud.title.axes,'children');
    hh = [hh;get(axh,'title');get(axh,'xlabel');get(axh,'ylabel')];
-   if notice ~= 0   % Display window
+   if notice ~=0   % Display window
      eph = dud.ephand;
      levh = dud.contours;
      eqpt = dud.eqpts;
@@ -4969,7 +4970,7 @@ elseif strcmp(action,'delete')
    set(arr.arrows,'vis',av);
    set([arr.hx;arr.hy],'vis',nv);
    set(arr.barrows,'vis',bv);
-   set(disph,'UserData',dud);
+   set(disph,'user',dud);
    set(disph,'WindowButtonDownFcn','pplane8(''down'')');
    
 elseif strcmp(action,'text')
@@ -4992,7 +4993,7 @@ elseif strcmp(action,'plotxy')  % Start a graph
   type = input1;
    
   ppdisp =gcf;
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   
   handles = dud.solhand;
   printstr = dud.printstr;
@@ -5077,10 +5078,10 @@ elseif strcmp(action,'plotxy')  % Start a graph
   y=get(objh,'ydata');
   hh = pplane8('plotxyfig',type,gcf);
   set(ppdisp,'WindowButtonDownFcn',oldcall);
-  aud = get(hh(2),'UserData');
-  ud = get(hh(1),'UserData');
+  aud = get(hh(2),'user');
+  ud = get(hh(1),'user');
   ud.data = [t;x;y];
-  set(hh(1),'UserData',ud);
+  set(hh(1),'user',ud);
   pplane8('plxy',aud.rad,hh(1));
    
 elseif strcmp(action,'plotxyfig')  % Build the graph figure.
@@ -5088,18 +5089,19 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
   type = input1;
   cfig = input2;  % This is ppdisp or a ppxy
   ppdisp = findobj('name','pplane8 Display');
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   ppdispa = dud.axes;
   xstring = get(get(ppdispa,'XLabel'),'string');
   ystring = get(get(ppdispa,'YLabel'),'string');
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   
-  ppxy = figure('number','off',...
+  ppxy = figure('NumberTitle','off',...
 		'tag','pplane8','visible','off');
-  name = ['pplane8 t-plot # ',int2str(ppxy)];
+  %name = ['pplane8 t-plot # ',int2str(ppxy)];
+  name = ['pplane8 t-plot # ',int2str(get(ppxy,'Number'))];
   ud.color = dud.color;
   ud.type = 0;
-  set(ppxy,'name',name,'UserData',ud);
+  set(ppxy,'name',name,'user',ud);
   pplane8('figdefault',ppxy);
   
   % Menus and Toolbar
@@ -5135,7 +5137,7 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
   set(findobj(fmenu,'label','Print Pre&view...'),'pos',6);
   set(findobj(fmenu,'label','&Print...'),'pos',7);
   qmenu = uimenu(fmenu,'label','Quit pplane8',...
-		 'call','pplane8(''quit'')',...
+		 'callback','pplane8(''quit'')',...
 		 'separator','on');
   
   % Insert menu
@@ -5149,7 +5151,7 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
   % View menu
   
   set(findobj(gcf,'label','&Figure Toolbar'),...
-      'call','pplane8(''showbar'')');
+      'callback','pplane8(''showbar'')');
   
   set(0,'showhiddenhandles',hhsetup);
   
@@ -5201,7 +5203,7 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
 	     'xlim',[0,1],'ylim',[0,1],...
 	     'clipping','on','visible','off');
   
-  set(leg,'UserData',str2mat(xstring,ystring));
+  set(leg,'user',str2mat(xstring,ystring));
   axes(leg);
   xh = text(0,0,xstring,'units','norm','visible','off',...
 	    'parent',leg);
@@ -5343,7 +5345,7 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
   radbot1 = radbot2 + th;
   pcall = [
       'ppdisp = findobj(''name'',''pplane8 Display'');',...
-      'dud = get(ppdisp,''UserData'');',...
+      'dud = get(ppdisp,''user'');',...
       'eval(dud.printstr)'
 	  ];
   
@@ -5394,7 +5396,7 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
 		     'string','Composite','value',rval5,'max',5);
   
   for i=1:5
-    set(rad(i),'UserData',[rad(:,[1:(i-1),(i+1):5]),leg,axy]);
+    set(rad(i),'user',[rad(:,[1:(i-1),(i+1):5]),leg,axy]);
   end
   
   callrad = [
@@ -5402,15 +5404,15 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
       'vv = get(me,''value'');'...
       'mm = get(me,''max'');'...
       'if vv ,'...
-      '	hand = get(me,''UserData'');',...
+      '	hand = get(me,''user'');',...
       '	set(hand(1:4),''value'',0);',...
       '	pplane8(''plxy'',me,gcf);'...
       'end, '...
       'set(me,''value'',mm);'...
       'axy = gca;',...
-      'aud = get(axy,''UserData'');',...
+      'aud = get(axy,''user'');',...
       'aud.rad = me;',...
-      'set(axy,''UserData'',aud);'];
+      'set(axy,''user'',aud);'];
   
   
   set(rad,'call',callrad);
@@ -5430,18 +5432,18 @@ elseif strcmp(action,'plotxyfig')  % Build the graph figure.
   aud.crop = cbut;
   aud.rad = rad(type);
   aud.leg = leg;
-  set(axy,'UserData',aud);
-  set(cbut,'UserData',axy);
+  set(axy,'user',aud);
+  set(cbut,'user',axy);
   
 elseif strcmp(action,'plxy')
    
    radbut = input1;
    fig = input2;
-   fud = get(fig,'UserData');
+   fud = get(fig,'user');
    figure(fig)
    tbh = findobj(allchild(fig),'flat','type','uitoolbar');
    r3dh = findobj(tbh,'tooltipstr','Rotate 3D');
-   ud = get(radbut,'UserData');
+   ud = get(radbut,'user');
    axy = ud(6);
    axis('auto');
    delete(get(axy,'children'));
@@ -5449,7 +5451,7 @@ elseif strcmp(action,'plxy')
    legch = get(leg,'children');
    type = get(radbut,'max');
    fud.type = type;
-   set(fig,'UserData',fud);
+   set(fig,'user',fud);
    if type == 3
       set(leg,'visible','on');
       set(legch,'visible','on');
@@ -5458,13 +5460,13 @@ elseif strcmp(action,'plxy')
       set(legch,'visible','off');
    end
    
-   aud = get(axy,'UserData');
+   aud = get(axy,'user');
    aud.h = [];
-   set(axy,'UserData',aud);  
-   strings = get(leg,'UserData');
+   set(axy,'user',aud);  
+   strings = get(leg,'user');
    xstring = deblank(strings(1,:));
    ystring = deblank(strings(2,:));
-   ud = get(fig,'UserData');
+   ud = get(fig,'user');
    data = ud.data;
    color = ud.color;
    
@@ -5556,14 +5558,14 @@ elseif strcmp(action,'plxy')
 elseif strcmp(action,'crop')
    
    cb = gcbo;
-   axy = get(cb,'UserData');
-   aud = get(axy,'UserData');
+   axy = get(cb,'user');
+   aud = get(axy,'user');
    delete(aud.h);
    set(aud.crop,'enable','off');
    aud.h = [];
-   set(axy,'UserData',aud);
+   set(axy,'user',aud);
    ppxy = gcf;
-   ud = get(ppxy,'UserData');
+   ud = get(ppxy,'user');
    data = ud.data;
    color = ud.color;
    t = data(1,:);
@@ -5576,10 +5578,10 @@ elseif strcmp(action,'crop')
    y = y(k);
    type = get(aud.rad,'max');
    hh = pplane8('plotxyfig',type,ppxy);
-   ud = get(hh(1),'UserData');
+   ud = get(hh(1),'user');
    ud.data = [t;x;y];
-   set(hh(1),'UserData',ud);
-   aud = get(hh(2),'UserData');
+   set(hh(1),'user',ud);
+   aud = get(hh(2),'user');
    pplane8('plxy',aud.rad,hh(1))  
  
 elseif strcmp(action,'plxybdf')
@@ -5589,7 +5591,7 @@ elseif strcmp(action,'plxybdf')
    set(dispf,'windowbuttonmotionfcn','pplane8(''plxybmf'')',...
       'windowbuttonupfcn','pplane8(''plxybuf'')',...
       'inter','on');
-   aud = get(dispa,'UserData');
+   aud = get(dispa,'user');
    delete(aud.h);
    aud.h = [];
    set(aud.crop,'enable','off');
@@ -5599,12 +5601,12 @@ elseif strcmp(action,'plxybdf')
    %  aud.centh = plot(point(1,1),point(1,2),'or','erase','xor');
    aud.h = plot(point(1,1),point(1,2),'--g',...
       'erase','xor','vis','off');
-   set(dispa,'UserData',aud);
+   set(dispa,'user',aud);
    
 elseif strcmp(action,'plxybmf')
    
    dispa = gca;
-   aud = get(dispa,'UserData');
+   aud = get(dispa,'user');
    point = get(dispa,'currentpoint');
    finish = point(1,1);
    start = aud.start;
@@ -5617,7 +5619,7 @@ elseif strcmp(action,'plxybmf')
          'vis','on');
    end
    aud.finish = finish;
-   set(gca,'UserData',aud);
+   set(gca,'user',aud);
    
 elseif strcmp(action,'plxybuf')
    
@@ -5625,7 +5627,7 @@ elseif strcmp(action,'plxybuf')
    dispf = gcf;
    xlim = get(dispa,'xlim');
    ylim = get(dispa,'ylim');
-   aud = get(dispa,'UserData');
+   aud = get(dispa,'user');
    set(gcf,'windowbuttonmotionfcn','',...
       'windowbuttonupfcn','',...
       'inter','on');
@@ -5638,12 +5640,12 @@ elseif strcmp(action,'plxybuf')
    else
       set(aud.h,'vis','off');
    end
-   set(gca,'UserData',aud);
+   set(gca,'user',aud);
    
    
 elseif strcmp(action,'print')
    
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    nstr = get(dud.notice,'string');
    nstr(1:4) = nstr(2:5);
    nstr{5} = 'Preparing to print the pplane8 Display Window.  Please be patient.';
@@ -5673,7 +5675,7 @@ elseif strcmp(action, 'eqptlist')
       'Source.                  ';
       'Sink.                    ';
       'Unspecified.             ';];
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    EqPtList = dud.eqpts;
    if isempty(EqPtList)
       disp('No equilibrium points have been computed.'),disp(' ')
@@ -5692,7 +5694,7 @@ elseif strcmp(action, 'eqptlist')
 elseif strcmp (action,'zoomback')
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    axh = dud.axes;
    Xname = dud.syst.xvar;
    Yname = dud.syst.yvar;
@@ -5728,22 +5730,22 @@ elseif strcmp (action,'zoomback')
    if (~isempty(sel))
       WINvect = wmat(sel,:);
       dud.syst.wind = WINvect;
-      set(gcf,'UserData',dud);
+      set(gcf,'user',dud);
       ppset = findobj('name','pplane8 Setup');
-      sud = get(ppset,'UserData');
-      set(disph,'UserData',dud);
+      sud = get(ppset,'user');
+      set(disph,'user',dud);
       set(sud.h.wind(1),'string',num2str(WINvect(1)));
       set(sud.h.wind(2),'string',num2str(WINvect(2)));
       set(sud.h.wind(3),'string',num2str(WINvect(3)));
       set(sud.h.wind(4),'string',num2str(WINvect(4)));
       sud.c.wind = WINvect;
       sud.o.wind = WINvect;
-      set(ppset,'UserData',sud);
-      aud = get(axh,'UserData');
+      set(ppset,'user',sud);
+      aud = get(axh,'user');
       aud.DY = [WINvect(2) - WINvect(1);WINvect(4) - WINvect(3)];
       dwind = [WINvect(1); WINvect(3); -WINvect(2); -WINvect(4)];
       aud.cwind = dwind - dud.settings.magn*[aud.DY;aud.DY];
-      set(axh,'UserData',aud);
+      set(axh,'user',aud);
       pplane8('dirfield',disph);
    end
    
@@ -5752,8 +5754,8 @@ elseif strcmp(action,'figdefault')
   fig = input1;
   set(fig,'CloseRequestFcn','pplane8(''closefcn'')');
   ppset = findobj('name','pplane8 Setup');
-  sud = get(ppset,'UserData');
-  ud = get(fig,'UserData');
+  sud = get(ppset,'user');
+  ud = get(fig,'user');
   ud.ssize = sud.ssize;
   fs = sud.fontsize;
   ud.fontsize = fs;
@@ -5818,7 +5820,7 @@ elseif strcmp(action,'figdefault')
     set(fig,'defaultsurfaceedgecolor',[0 0 0])
     
   end 
-  set(fig,'UserData',ud);
+  set(fig,'user',ud);
   
 elseif strcmp(action,'zoominsq')
    
@@ -5827,7 +5829,7 @@ elseif strcmp(action,'zoominsq')
    set(gcf,'WindowButtonDownFcn','pplane8(''zoomsqd'')',...
       'WindowButtonUpFcn','1;','inter','on');
    set(gca,'inter','on');
-   dud = get(gcf,'UserData');
+   dud = get(gcf,'user');
    nstr = get(dud.notice,'string');
    nstr(1:4) = nstr(2:5);
    nstr{5} = ['Pick a center and ',...
@@ -5837,12 +5839,12 @@ elseif strcmp(action,'zoominsq')
 elseif strcmp(action,'zoomsqd')
    
    ppdispa = gca;
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    point = get(ppdispa,'currentpoint');
    aud.center = point(1,[1,2]);
    aud.centh = plot(point(1,1),point(1,2),'or','erase','xor');
    aud.box = plot(point(1,1),point(1,2),'--r','erase','xor');
-   set(ppdispa,'UserData',aud);
+   set(ppdispa,'user',aud);
    set(gcf,'windowbuttonmotionfcn','pplane8(''zoomsqm'')',...
       'windowbuttonupfcn','pplane8(''zoomsqu'')');
    
@@ -5850,7 +5852,7 @@ elseif strcmp(action,'zoomsqd')
 elseif strcmp(action,'zoomsqm')
    
    ppdispa = gca;
-   aud = get(ppdispa,'UserData');
+   aud = get(ppdispa,'user');
    point = get(ppdispa,'currentpoint');
    point = point(1,[1,2])';
    un = get(ppdispa,'units');
@@ -5866,9 +5868,9 @@ elseif strcmp(action,'zoomsqm')
 elseif strcmp(action,'zoomsqu')
    
    disph = gcf;
-   dud = get(disph,'UserData');
+   dud = get(disph,'user');
    axh = dud.axes;
-   aud = get(axh,'UserData');
+   aud = get(axh,'user');
    hand = [aud.centh;aud.box];
    set(hand,'erase','normal');
    delete(hand);
@@ -5899,8 +5901,8 @@ elseif strcmp(action,'zoomsqu')
    aud.DY = DY;
    dwind = [WINvect(1); WINvect(3); -WINvect(2); -WINvect(4)];
    aud.cwind = dwind - dud.settings.magn*[aud.DY;aud.DY];
-   set(axh,'units',un,'UserData',aud);	
-   set(disph,'UserData',dud);
+   set(axh,'units',un,'user',aud);	
+   set(disph,'user',dud);
    set(disph,'WindowButtonDownFcn','pplane8(''down'')',...
       'WindowButtonMotionFcn','pplane8(''cdisp'')',...
       'WindowButtonUpFcn','');
@@ -5909,20 +5911,20 @@ elseif strcmp(action,'zoomsqu')
    if isempty(ppset)
       pplane8('confused');
    else
-      sud = get(ppset,'UserData');
+      sud = get(ppset,'user');
       sud.c.wind = WINvect;
       sud.o.wind = WINvect;
       set(sud.h.wind(1),'string',num2str(WINvect(1)));
       set(sud.h.wind(2),'string',num2str(WINvect(2)));
       set(sud.h.wind(3),'string',num2str(WINvect(3)));
       set(sud.h.wind(4),'string',num2str(WINvect(4)));
-      set(ppset,'UserData',sud);
+      set(ppset,'user',sud);
    end
    
 elseif strcmp(action,'level')
   
   ppdisp = gcf;
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   lfcn = dud.level;
   Xname = dud.syst.xvar;
   Yname = dud.syst.yvar;
@@ -5984,16 +5986,16 @@ elseif strcmp(action,'level')
 			'call','close');
       
   for i=1:3
-    set(lev.ch(i),'UserData',lev.ch(:,[1:(i-1),(i+1):3]));
+    set(lev.ch(i),'user',lev.ch(:,[1:(i-1),(i+1):3]));
   end
   
   callrad = [
       'me = get(gcf,''currentobject'');',...
       'kk = get(me,''max'');',...
       'col = get(me,''backg'');',...
-      'set(get(me,''UserData''),''value'',0),',...
+      'set(get(me,''user''),''value'',0),',...
       'set(me,''value'',kk);',...
-      'ud = get(gcf,''UserData'');',...
+      'ud = get(gcf,''user'');',...
       'if kk == 1,',...
       '   set(ud.rhs,''enable'',''on'',''backg'',''w'');',...
       'else,',...
@@ -6060,17 +6062,17 @@ elseif strcmp(action,'level')
   set(lev.rhs,'enable','off');  
   
   child = get(pplevel,'children');
-  set(pplevel,'vis','on','UserData',lev);
+  set(pplevel,'vis','on','user',lev);
   set(child,'vis','on');
   
 elseif strcmp(action,'levcomp')
   
   pplevel = gcf;
-  ud = get(pplevel,'UserData');
+  ud = get(pplevel,'user');
   ppdisp = findobj('name','pplane8 Display');
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   ppset = findobj('name','pplane8 Setup');
-  sud = get(ppset,'UserData');
+  sud = get(ppset,'user');
    ch = ud.ch;
   val = zeros(1,3);
   for kk = 1:3
@@ -6199,7 +6201,7 @@ elseif strcmp(action,'levcomp')
 	    'color',dud.color.level,...
 	    'linestyle',':');
   dud.contours = [dud.contours ;hcont;hlabel];
-  set(ppdisp,'UserData',dud);
+  set(ppdisp,'user',dud);
   
 elseif strcmp(action,'restart')
    
@@ -6218,15 +6220,15 @@ elseif strcmp(action,'restart')
    end
    h = findobj('tag','pplane8');
    delete(setdiff(h,ppset));
-   sud = get(ppset,'UserData');
+   sud = get(ppset,'user');
    sud.flag = 0;
-   set(ppset,'UserData',sud);
+   set(ppset,'user',sud);
    figure(ppset)
    
 elseif strcmp(action,'quit')
    
   ppset = findobj('name','pplane8 Setup');
-  sud = get(ppset,'UserData');
+  sud = get(ppset,'user');
   if sud.remtd 
     rmpath(tempdir);
   end
@@ -6258,7 +6260,7 @@ elseif strcmp(action,'closefcn')
          pplane8('quit');
       end
    elseif strcmp(name,'pplane8 Linearization')
-      dud = get(fig,'UserData');
+      dud = get(fig,'user');
       fcn = dud.function;
       if (exist(fcn)==2) delete([fcn,'.m']);end    
       delete(findobj('label',name));
@@ -6301,7 +6303,7 @@ elseif strcmp(action,'export')
   % Options menu.
   
   disph = gcf;
-  dud = get(disph,'UserData');
+  dud = get(disph,'user');
   arr = dud.arr;
   lv = get(arr.lines,'vis');
   av = get(arr.arrows,'vis');
@@ -6326,7 +6328,7 @@ elseif strcmp(action,'export')
   notice = dud.notice;
   switch length(trjh)
    case 0
-    if notice ~= 0 
+    if notice ~=0 
       nstr = get(notice,'string');
       nstr(1:3) = nstr(3:5);
       nstr{4} = 'There are no solutions.';
@@ -6338,7 +6340,7 @@ elseif strcmp(action,'export')
    case 1
     th = trjh;
    otherwise
-    if notice ~= 0
+    if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5} = 'Select a solution with the mouse.';
@@ -6349,7 +6351,7 @@ elseif strcmp(action,'export')
     th = get(disph,'currentobject');
   end
   if isempty(th)
-    if notice ~= 0 
+    if notice ~=0 
       nstr = get(notice,'string');
       nstr(1:3) = nstr(3:5);
       nstr{4} = 'The item selected is not a solution.';
@@ -6384,7 +6386,7 @@ elseif strcmp(action,'export')
     yval = yval(:);
     ivstr = struct(tname,tval,xname,xval,yname,yval);
     assignin('base',vstr,ivstr);
-    if notice ~= 0 
+    if notice ~=0 
       nstr = get(notice,'string');
       nstr(1:3) = nstr(3:5);
       nstr{4} = ['The data has been exported as the structure ',...
@@ -6402,14 +6404,14 @@ elseif strcmp(action,'export')
   set(arr.arrows,'vis',av);
   set([arr.hx;arr.hy],'vis',nv);
   set(arr.barrows,'vis',bv);
-  set(disph,'UserData',dud);
+  set(disph,'user',dud);
   set(disph,'WindowButtonDownFcn','pplane8(''down'')');
    
    
 elseif strcmp(action,'cdisp')
   
   [ppcbo,ppdisp] = gcbo;
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   cp = get(ppdisp,'currentpoint');
   fpos = get(ppdisp,'pos');
   ppax = dud.axes;
@@ -6426,7 +6428,7 @@ elseif strcmp(action,'periodic')
   % Find a periodic orbit.
   
   ppdisp = findobj('name','pplane8 Display');
-  dud = get(ppdisp,'UserData');
+  dud = get(ppdisp,'user');
   dfcn = dud.function;
   direction = dud.dir;
   notice = dud.notice;
@@ -6447,11 +6449,11 @@ elseif strcmp(action,'periodic')
     intminus = [0, 0];
   end
   ppdispa = dud.axes;
-  aud = get(ppdispa,'UserData');
+  aud = get(ppdispa,'user');
   DY = aud.DY;
   aud.plot = 0;
   atol = tol*DY*1e-4';
-  set(ppdispa,'UserData',aud);
+  set(ppdispa,'user',aud);
   nstr = get(dud.notice,'string');
   nstr(1:4) = nstr(2:5);
   nstr{5} = 'Choose a starting point with the mouse.';
@@ -6488,9 +6490,9 @@ elseif strcmp(action,'periodic')
   exist(dfcn);
   dfh = str2func(dfcn);
   dud.noticeflag = 0;   % Notices only from here.
-  set(ppdisp,'UserData',dud);
+  set(ppdisp,'user',dud);
   if intplus(2)>intplus(1)
-    if notice ~= 0
+    if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5} = 'The forward orbit ';
@@ -6498,7 +6500,7 @@ elseif strcmp(action,'periodic')
     end
     drawnow				
     [tp,xp] = feval(solh,dfh,intplus,z0,opt);
-    aud = get(ppdispa,'UserData');
+    aud = get(ppdispa,'user');
     set(aud.line,'erase','normal')
     delete(aud.line);
     aud.line = [];
@@ -6534,7 +6536,7 @@ elseif strcmp(action,'periodic')
       kkk = max(kk(find(kk<kmax-30)));
       T = tp(kmax) - tp(kkk);
       aud.gstop = 0;
-      set(ppdispa,'UserData',aud);
+      set(ppdispa,'user',aud);
       kkk = 0;
       NN = 1;
       dz0 = feval(dfh,0,z0);
@@ -6551,7 +6553,7 @@ elseif strcmp(action,'periodic')
       drawnow
       [tp,xp] = feval(solh,dfh,[0 3*T],z0,opt);
       aud.gstop = 1;
-      set(ppdispa,'UserData',aud);
+      set(ppdispa,'user',aud);
       hnew = plot(xp(:,1),xp(:,2),'color','b');
       set(hnew,'zdata',tp);
       solhand = [dud.solhand;hnew];
@@ -6561,7 +6563,7 @@ elseif strcmp(action,'periodic')
   end
   if intminus(2)<intminus(1)
     z0 = z00;
-    if notice ~= 0
+    if notice ~=0
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5} = 'The backward orbit ';
@@ -6569,7 +6571,7 @@ elseif strcmp(action,'periodic')
     end
     drawnow	
     [tp,xp] = feval(solh,dfh,intminus,z0,opt);
-    aud = get(ppdispa,'UserData');
+    aud = get(ppdispa,'user');
     set(aud.line,'erase','normal')
     delete(aud.line);
     aud.line = [];
@@ -6604,7 +6606,7 @@ elseif strcmp(action,'periodic')
       kkk = max(kk(find(kk<kmax-30)));
       T = tp(kmax) - tp(kkk);
       aud.gstop = 0;
-      set(ppdispa,'UserData',aud);
+      set(ppdispa,'user',aud);
       kkk = 0;
       NN = 1;
       dz0 = feval(dfh,0,z0);
@@ -6621,7 +6623,7 @@ elseif strcmp(action,'periodic')
       drawnow
       [tp,xp] = feval(solh,dfh,[0 3*T],z0,opt);
       aud.gstop = 1;
-      set(ppdispa,'UserData',aud);
+      set(ppdispa,'user',aud);
       hnew = plot(xp(:,1),xp(:,2),'color','b');
       set(hnew,'zdata',tp);
       solhand = [dud.solhand;hnew];
@@ -6631,11 +6633,11 @@ elseif strcmp(action,'periodic')
   end
   dud.noticeflag = 1;
   dud.dir = 0;
-  set(ppdisp,'UserData',dud);
+  set(ppdisp,'user',dud);
   aud.plot = 1;
-  set(ppdispa,'UserData',aud);
+  set(ppdispa,'user',aud);
 
-  if notice ~= 0
+  if notice ~=0
     nstr = get(notice,'string');
     nstr(1:4) = nstr(2:5);
     nstr{5} = 'Ready';
@@ -6663,9 +6665,9 @@ function [tout,yout] = ppdp45(dfcn,tspan,y0,disph)
 
 % Input the user data. 
   
-  dud = get(disph,'UserData');
+  dud = get(disph,'user');
   dispha = dud.axes;
-  ud = get(dispha,'UserData');
+  ud = get(dispha,'user');
   refine = dud.settings.refine;
   tol = dud.settings.tol;
   gstop = ud.gstop;
@@ -6849,7 +6851,7 @@ function [tout,yout] = ppdp45(dfcn,tspan,y0,disph)
     
     % Update stop.   Maybe the stop button has been pressed.
     
-    ud = get(dispha,'UserData');
+    ud = get(dispha,'user');
     stop = max(ud.stop,stop);
     
     if gstop
@@ -6944,7 +6946,7 @@ function [tout,yout] = ppdp45(dfcn,tspan,y0,disph)
 					  
   end  % while ~stop
   ud.stop = stop;
-  set(dispha,'UserData',ud); 
+  set(dispha,'user',ud); 
   tout = tout(1:N);
   yout = yout(1:N,:);
   if dud.notice ~= 0 && dud.noticeflag
@@ -6980,9 +6982,9 @@ function [tout,yout] = pprk4(dfcn,tspan,y0,disph)
 
 % Input the user data. 
 
-dud = get(disph,'UserData');
+dud = get(disph,'user');
 dispha = dud.axes;
-ud = get(dispha,'UserData');
+ud = get(dispha,'user');
 refine = dud.settings.refine;
 tol = dud.settings.tol;
 gstop = ud.gstop;
@@ -7089,7 +7091,7 @@ while ~stop
   
   % Update stop.   Maybe the stop button has been pressed.
 
-  ud = get(dispha,'UserData');
+  ud = get(dispha,'user');
   stop = max(ud.stop,stop);
   
   if gstop
@@ -7175,7 +7177,7 @@ while ~stop
 end  % while ~stop
 
 ud.stop = stop;
-set(dispha,'UserData',ud); 
+set(dispha,'user',ud); 
 tout = tout(1:N);
 yout = yout(1:N,:);
 if dud.notice ~= 0 && dud.noticeflag
@@ -7213,10 +7215,10 @@ function output = ppout(t,y,flag,varargin)
 
 output = 0;
 ppdisp = findobj(get(0,'child'),'flat','name','pplane8 Display'); %gca;   % 
-dud = get(ppdisp,'UserData');
+dud = get(ppdisp,'user');
 ppdispa = dud.axes;
 dfcn = dud.function;
-ud = get(ppdispa,'UserData');
+ud = get(ppdispa,'user');
 stop = ud.stop;
 gstop = ud.gstop;
 col = dud.color.temp;
@@ -7313,7 +7315,7 @@ if (nargin < 3) | (isempty(flag))
         ud.stop = stop;
         yold = ud.y;    
         ud.y = y(:,L);
-        set(ppdispa,'UserData',ud);
+        set(ppdispa,'user',ud);
 	if slow
 	  ttt = clock;
 	  newtime = (24*ttt(4)+ttt(5))*60 + ttt(6);
