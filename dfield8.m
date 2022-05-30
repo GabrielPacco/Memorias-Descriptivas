@@ -20,10 +20,11 @@ function output = dfield8(action,input1,input2,input3)
 %	line field, and of changing the number of field points computed
 %	and displayed.
 
-%  Copywright (c) 1995, 1997, 1998, 1999, 2000, 2001, 2002, 2003 
-%                 John C. Polking Rice University
-%  Last modified: April 2, 2003
-
+%  1995, 1997, 1998, 1999, 2000, 2001, 2002, 2003 (Last modified April 2, 2003)
+%  John C. Polking Rice University
+%  
+%  Modified in April 2019 by Giampiero Campa for versions R2014b and later
+%  Copyright 2019 The MathWorks, Inc.
 
   startstr = 'dfield8';
 
@@ -255,8 +256,8 @@ function output = dfield8(action,input1,input2,input3)
     end
     ud.color = color;
     
-    dfset = figure('name','dfield8 Setup','numbertitle','off',...
-		   'tag','dfield8','visible','off',...
+    dfset = figure('name','dfield8 Setup','NumberTitle','off',...
+		   'tag','dfield8','menubar','figure','toolbar','none','visible','off',...
 		   'user',ud);
     
     dfield8('figdefault',dfset);
@@ -619,35 +620,35 @@ function output = dfield8(action,input1,input2,input3)
     meprev = findobj(mefile,'label','Print Pre&view...');
     mepset = findobj(mefile,'label','Pa&ge Setup...');
     set(get(mefile,'child'),'vis','off');
-    meload = uimenu(mefile,'label','Load an equation ...',...
-		  'call','dfield8(''loadsyst'',''system'');',...
+  meload = uimenu(mefile,'label','Load an equation ...',...
+		  'Callback','dfield8(''loadsyst'',''system'');',...
 		  'pos',1);
   mesave = uimenu(mefile,'label','Save the current equation ...',...
-		  'call','dfield8(''savesyst'',''system'');',...
+		  'Callback','dfield8(''savesyst'',''system'');',...
 		  'pos',2);
   meloadg = uimenu(mefile,'label','Load a gallery ...',...
-		   'call','dfield8(''loadsyst'',''gallery'');',...
+		   'Callback','dfield8(''loadsyst'',''gallery'');',...
 		   'separator','on','pos',3);
   mesaveg = uimenu(mefile,'label','Save a gallery ...',...
-		   'call','dfield8(''savesyst'',''gallery'');',...
+		   'Callback','dfield8(''savesyst'',''gallery'');',...
 		   'tag','savegal','pos',4);
   medelg = uimenu(mefile,'label','Delete the current gallery',...
-		  'call',delgall,'pos',5);
+		  'Callback',delgall,'pos',5);
   melddg = uimenu(mefile,'label','Load the default gallery',...
-		  'call','dfield8(''loadsyst'',''default'');',...
+		  'Callback','dfield8(''loadsyst'',''default'');',...
 		  'enable','on',...
 		  'tag','load default','pos',6);
-  meproceed = uimenu(mefile,'label','Proceed','call',...
+  meproceed = uimenu(mefile,'label','Proceed','Callback',...
 		       'dfield8(''proceed'')','separator','on',...
 		       'accelerator','G','pos',7);
-    merevert = uimenu(mefile,'label','Revert','call',...
+    merevert = uimenu(mefile,'label','Revert','Callback',...
 		      'dfield8(''revert'')','separator','off','pos',8);
     set(mepset,'vis','on','pos',9);
     set(meprev,'vis','on','label','Page Pre&view...','pos',10);
     set(meexp,'vis','on','pos',11,'separator','off');
-    merestart = uimenu(mefile,'label','Restart dfield8','call',...
+    merestart = uimenu(mefile,'label','Restart dfield8','Callback',...
 		       'dfield8(''restart'')','separator','on','pos',12);
-    mequit = uimenu(mefile,'label','Quit dfield8','call',...
+    mequit = uimenu(mefile,'label','Quit dfield8','Callback',...
 		    'dfield8(''quit'')','separator','on','pos',13);
     
     % Edit menu.
@@ -655,7 +656,7 @@ function output = dfield8(action,input1,input2,input3)
     set(get(meedit,'child'),'vis','off');
     
     meclrf = uimenu(meedit,'label','Clear equations',...
-		    'call',['ud = get(gcf,''user'');h = ud.h;',...
+		    'Callback',['ud = get(gcf,''user'');h = ud.h;',...
 		    'set([h.xname,h.der,h.tname,h.der],''string'','''');'],...
 		    'accelerator','E');
     
@@ -667,11 +668,11 @@ function output = dfield8(action,input1,input2,input3)
 	'set(gcf,''user'',ud);',...
 	     ];
     meclrp = uimenu(meedit,'label','Clear parameters',...
-		    'call',pclear,...
+		    'Callback',pclear,...
 		    'accelerator','N');
     
     meclrwind = uimenu(meedit,'label','Clear display window',...
-		       'call',['ud = get(gcf,''user'');',...
+		       'Callback',['ud = get(gcf,''user'');',...
 		    'set(ud.h.wind,''string'','''');'],...
 		       'accelerator','D');
     
@@ -685,7 +686,7 @@ function output = dfield8(action,input1,input2,input3)
 	       ];
     
     meclrall = uimenu(meedit,'label','Clear all',...
-		      'call',allclear,...
+		      'Callback',allclear,...
 		      'accelerator','A',...
 		      'separator','on');
     
@@ -695,14 +696,14 @@ function output = dfield8(action,input1,input2,input3)
     sysmenu = uimenu('label','Gallery','visible','off','pos',3);
     
     meadd = uimenu(sysmenu,'label','Add current equation to the gallery',...
-		   'call','dfield8(''addgall'');','tag','add system');
+		   'Callback','dfield8(''addgall'');','tag','add system');
     sep = 'on';
     
     for kk = 1:length(system)
       kkk = num2str(kk);
       if kk == 2, sep = 'off';end
       sysmen(kk) = uimenu(sysmenu,'label',system(kk).name,...
-			  'call',['dfield8(''system'',',kkk,')'],...
+			  'Callback',['dfield8(''system'',',kkk,')'],...
 			  'separator',sep,'visible','on');
     end
     set(sysmenu,'user',system);
@@ -1045,7 +1046,7 @@ function output = dfield8(action,input1,input2,input3)
 	  
       else
 	dfdisp = figure('name','dfield8 Display',...
-			'numbertitle','off','interrupt','on',...
+			'NumberTitle','off','interrupt','on',...
 			'visible','off','tag','dfield8');
 	dfield8('figdefault',dfdisp);
 	dud = get(dfdisp,'user');	
@@ -1130,7 +1131,7 @@ function output = dfield8(action,input1,input2,input3)
 			'interrupt','on',...
 			'xgrid','on',...
 			'ygrid','on',...
-			'sortmethod','depth',...
+			'SortMethod','childorder',...
 			'visible','off',...
 			'tag','display axes');
 	
@@ -1163,20 +1164,20 @@ function output = dfield8(action,input1,input2,input3)
 	dbutt(1) = uicontrol('style','push',...
 			     'pos',[buttl,dfaxb+2*buttsep,buttw,butth],...
 			     'string','Stop',...
-			     'call',stopstr,...
+			     'Callback',stopstr,...
 			     'vis','off',...
 			     'tag','stop');
 	
 	dbutt(2) = uicontrol('style','push',...
 			     'pos',[buttl,dfaxb,buttw,butth],...
 			     'string','Quit',...
-			     'call','dfield8(''quit'')',...
+			     'Callback','dfield8(''quit'')',...
 			     'visible','off');
 	
 	dbutt(3) = uicontrol('style','push',...
 			     'pos',[buttl,dfaxb+buttsep,buttw,butth],...
 			     'string','Print',...
-			     'call','dfield8(''print'')',...
+			     'Callback','dfield8(''print'')',...
 			     'visible','off');	
       
 	dud.butt = dbutt;
@@ -1203,11 +1204,11 @@ function output = dfield8(action,input1,input2,input3)
 	set(findobj(fmenu,'label','Print Pre&view...'),'pos',5);
 	set(findobj(fmenu,'label','Print Set&up...'),'pos',6);
 	set(findobj(fmenu,'label','&Print...'),'pos',7);
-	merestart = uimenu(fmenu,'label','Restart dfield8','call',...
+	merestart = uimenu(fmenu,'label','Restart dfield8','Callback',...
 			   'dfield8(''restart'')','separator','on','pos',8);
 	
 	mequit = uimenu(fmenu,'label','Quit dfield8',...
-			'call','dfield8(''quit'')','separator','on');
+			'Callback','dfield8(''quit'')','separator','on');
 	
 	% Tools menu
 	
@@ -1227,36 +1228,36 @@ function output = dfield8(action,input1,input2,input3)
 	
 	emenu = findobj(gcf,'label','&Edit'); 
 	menu(2) = uimenu(emenu,'label','Zoom in.',...
-			 'call','dfield8(''zoomin'')',...
+			 'Callback','dfield8(''zoomin'')',...
 			 'pos',1);
 	
 	zbmenu = uimenu(emenu,'label','Zoom back.',...
-			'call','dfield8(''zoomback'')',...
+			'Callback','dfield8(''zoomback'')',...
 			'enable','off',...
 			'tag','zbmenu',...
 			'pos',2);
 	
 	metext = uimenu(emenu,'label','Enter text on the Display Window.',...
-			'call','dfield8(''text'')',...
+			'Callback','dfield8(''text'')',...
 			'separator','on',...
 			'pos',3);
 	
 	medel = uimenu(emenu,'label','Delete a graphics object.',...
-		       'call','dfield8(''delete'')',...
+		       'Callback','dfield8(''delete'')',...
 		       'visible','on',...
 		       'pos',4);
 	medall = uimenu(emenu,'label','Erase all solutions.',...
-			'call','dfield8(''dallsol'')',...
+			'Callback','dfield8(''dallsol'')',...
 			'separator','off',...
 			'pos',5);
 	
 	medalllev = uimenu(emenu,'label','Erase all level curves.',...
-			   'call','dfield8(''dalllev'')',...
+			   'Callback','dfield8(''dalllev'')',...
 			   'separator','off',...
 			   'pos',6);
 	
 	medall = uimenu(emenu,'label','Erase all graphics objects.',...
-			'call','dfield8(''dall'')',...
+			'Callback','dfield8(''dall'')',...
 			'separator','off',...
 			'pos',7);
 	
@@ -1276,18 +1277,18 @@ function output = dfield8(action,input1,input2,input3)
 	
 	menu(1) = uimenu('label','Options','visible','off','pos',3);
 	
-	menukey = uimenu(menu(1),'label','Keyboard input.','call',...
+	menukey = uimenu(menu(1),'label','Keyboard input.','Callback',...
 			 'dfield8(''kbd'')');
 	
 	mesev   = uimenu(menu(1),'label','Plot several solutions.',...
-			 'call','dfield8(''several'')');
+			 'Callback','dfield8(''several'')');
 	
 	menulevel = uimenu(menu(1),'label','Plot level curves.',...
-			   'call','dfield8(''level'')',...
+			   'Callback','dfield8(''level'')',...
 			   'separator','off','tag','level');
 	
 	meexportdata = uimenu(menu(1),'label','Export solution data.',...
-			      'call','dfield8(''export'')',...
+			      'Callback','dfield8(''export'')',...
 			      'separator','off','tag','dexp');
 	
 	plcall = [
@@ -1310,10 +1311,10 @@ function output = dfield8(action,input1,input2,input3)
 	    'end'];  
 	
 	mepline = uimenu(menu(1),'label','Show the phase line.',...
-			 'call',plcall,'tag','pline','separator','on');	  
+			 'Callback',plcall,'tag','pline','separator','on');	  
 	
 	mesolvset = uimenu(menu(1),'label','Solver settings.',...
-			   'call','dfield8(''solvset'')');
+			   'Callback','dfield8(''solvset'')');
 	mesolve = uimenu(menu(1),'label','Solver.');
 	
 	solverstr = ['ud = get(gcf,''user'');',...
@@ -1382,19 +1383,19 @@ function output = dfield8(action,input1,input2,input3)
 	
 	dud.solver(1) = uimenu(mesolve,'label','Dormand-Prince',...
 			       'checked',dpch,...
-			       'call',solverstr,'user',dpset);
+			       'Callback',solverstr,'user',dpset);
 	
 	dud.solver(2) = uimenu(mesolve,'label','Euler',...
 			       'checked',eulch,...
-			       'call',solverstr,'user',eulset);
+			       'Callback',solverstr,'user',eulset);
 	
 	dud.solver(3) = uimenu(mesolve,'label','Runge-Kutta 2',...
 			       'checked',rk2ch,...
-			       'call',solverstr,'user',rk2set);
+			       'Callback',solverstr,'user',rk2set);
 	
 	dud.solver(4) = uimenu(mesolve,'label','Runge-Kutta 4',...
 			       'checked',rk4ch,...
-			       'call',solverstr,'user',rk4set); 
+			       'Callback',solverstr,'user',rk4set); 
 	
 	medir = uimenu(menu(1),'label','Solution direction.');
 	
@@ -1408,28 +1409,28 @@ function output = dfield8(action,input1,input2,input3)
 	dud.direction(1) = uimenu(medir,'label','Both',...
 				  'checked','on',...
 				  'user',0,...
-				  'call',directionstr);
+				  'Callback',directionstr);
 	dud.dir = 0;
 	
 	dud.direction(2) = uimenu(medir,'label','Forward',...
 				  'user',1,...
-				  'call',directionstr);
+				  'Callback',directionstr);
 	
 	dud.direction(3) = uimenu(medir,'label','Back',...
 				  'user',-1,...
-				  'call',directionstr);
+				  'Callback',directionstr);
 	
 	meset   = uimenu(menu(1),'label','Window settings.',...
-			 'call','dfield8(''settings'')');
+			 'Callback','dfield8(''settings'')');
 	
 	menu(6) = uimenu(menu(1),'label','Make the Display Window inactive.',...
-			 'call','dfield8(''hotcold'')','separator','on');
+			 'Callback','dfield8(''hotcold'')','separator','on');
 	
 	% View menu
 	
 	set(findobj(gcf,'label','&View'),'pos',4);
 	set(findobj(gcf,'label','&Figure Toolbar'),...
-	    'call','dfield8(''showbar'')');
+	    'Callback','dfield8(''showbar'')');
 	dud.menu = menu;
 	
 	set(dfdisp,'ToolBar','none');
@@ -1538,7 +1539,7 @@ function output = dfield8(action,input1,input2,input3)
       WINvect = dud.syst.wind;
       settings = dud.settings;
       notice = dud.notice;
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr = get(notice,'string');
 	nstr(1:4)=nstr(2:5);
 	nstr{5,1} = 'Computing the field elements.';
@@ -1589,6 +1590,10 @@ function output = dfield8(action,input1,input2,input3)
       
       [Tt,Xx]=meshgrid(TTTg,XXXg);
       
+      % make sure dfcn is accessible
+      % cdir=pwd;cd(tempdir);which(dfcn);cd(cdir);
+      addpath(tempdir);
+      
       % Calculate the line and vector fields.
       
       Xx=Xx(:);Tt=Tt(:);
@@ -1597,7 +1602,6 @@ function output = dfield8(action,input1,input2,input3)
       Vv = ones(size(Ww)) + Ww*sqrt(-1);
       Vv = Vv.';
       Arrflag = dud.fieldtype;
-      
       
       mgrid = Tt+Xx.*sqrt(-1); % mgrid = mgrid(:);
       zz=Vv.';
@@ -1642,7 +1646,7 @@ function output = dfield8(action,input1,input2,input3)
       dud.arr.lines = arrh1;	   % Save the handles for later use.
       dud.arr.arrows = arrh2;	   % Save the handles for later use.
       
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr = get(notice,'string');
 	nstr(1:4) = nstr(2:5);
 	nstr{5,1} = 'Ready.';
@@ -1710,7 +1714,7 @@ function output = dfield8(action,input1,input2,input3)
     %  set([ch;mh],'enable','on');
     set(ch,'enable','on');
     notice = dud.notice;
-    if (notice ~= 0)
+    if isvalid(notice)
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = 'Ready.';
@@ -1731,7 +1735,7 @@ function output = dfield8(action,input1,input2,input3)
     set(disph,'WindowbuttonDownFcn',wbdf);
     dud = get(disph,'user');
     notice = dud.notice;
-    if (notice ~= 0)
+    if isvalid(notice)
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = ['Pick initial points with the mouse.  ',...
@@ -1744,7 +1748,7 @@ function output = dfield8(action,input1,input2,input3)
       initpt = [X(k),Y(k)];
       dfield8('solution',initpt,disph);
     end
-    if (notice ~= 0)
+    if isvalid(notice)
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5,1} = 'Ready.';
@@ -1804,35 +1808,35 @@ function output = dfield8(action,input1,input2,input3)
       cflag = 0;
       if intplus(2)>intplus(1)
 	cflag = cflag + 1;
-	if (notice ~= 0)
+	if isvalid(notice)
 	  nstr = get(notice,'string');
 	  nstr(1:4) = nstr(2:5);
 	  nstr{5} = ['The forward orbit from',ptstr];
 	  set(notice,'string',nstr);
 	end
-	drawnow				
+	%drawnow				
 	
 	[tp,xp] = feval(solvhandle,dfcn,intplus,initpt(2),disph);
 	aud = get(dfdispa,'user');
 	hnew1 = aud.line;
-	set(aud.pline,'erase','normal','color', pcol);  
+	set(aud.pline,'color', pcol);  
 	dud.plhand=[dud.plhand;aud.pline];   
       end		
       
       if intminus(2) < intminus(1)
 	cflag = cflag + 2;
-	if (notice	~= 0)
+	if isvalid(notice)	
 	  nstr = get(notice,'string');
 	  nstr(1:4) = nstr(2:5);
 	  nstr{5} = ['The backward orbit from',ptstr];
 	  set(notice,'string',nstr);
 	end
-	drawnow
+	%drawnow
 	
 	[tm,xm] = feval(solvhandle,dfcn,intminus,initpt(2),disph);
 	aud = get(dfdispa,'user');
 	hnew2 = aud.line;
-	set(aud.pline,'erase','normal','color', pcol);     
+	set(aud.pline,'color', pcol);     
 	dud.plhand=[dud.plhand;aud.pline];   
 	set(stopbutt,'vis','off');
       end	  % if intminus(2) < intminus(1)	
@@ -1842,14 +1846,12 @@ function output = dfield8(action,input1,input2,input3)
       switch cflag
        case 1 % positive only
 	set(hnew1,'xdata',tp(:),'ydata',xp(:),'color',pcol);
-	set(hnew1,'erase','normal');
 	dud.solhand = [dud.solhand;hnew1];
 	
        case 2 % negative only
 	x = flipud(xm);
 	t = flipud(tm);
 	set(hnew2,'xdata',t(:),'ydata',x(:),'color',pcol);
-	set(hnew2,'erase','normal');
 	dud.solhand = [dud.solhand;hnew2];
 	
        case 3 % both directions
@@ -1859,7 +1861,6 @@ function output = dfield8(action,input1,input2,input3)
 	t=[t;tp];
 	delete(hnew1);
 	set(hnew2,'xdata',t(:),'ydata',x(:),'color',pcol);
-	set(hnew2,'erase','normal');
 	dud.solhand = [dud.solhand;hnew2];
       end	 % switch cflag
       set(disph,'user',dud);
@@ -1966,10 +1967,10 @@ function output = dfield8(action,input1,input2,input3)
     
     ppkbd = figure('name','dfield8 Keyboard input',...
 		   'vis','off',...
-		   'numbertitle','off','tag','dfield8');
+		   'NumberTitle','off','tag','dfield8');
     
     dfield8('figdefault',ppkbd);
-    set(ppkbd,'menubar','none');
+    set(ppkbd,'menubar','figure');
     
     kbd.fr1 = uicontrol('style','frame');
     
@@ -1988,7 +1989,7 @@ function output = dfield8(action,input1,input2,input3)
     kbd.tval = uicontrol('style','edit','background','w');
     
     kbd.xval = uicontrol('style','edit',...
-			 'string','','call','','background','w');
+			 'string','','Callback','','background','w');
     
     kbd.t0 = uicontrol('style','edit','background','w');
     
@@ -2001,10 +2002,10 @@ function output = dfield8(action,input1,input2,input3)
 			 'string','Specify a computation interval.');
   
     kbd.comp = uicontrol('style','push',...		
-			 'string','Compute','call','dfield8(''kcompute'')');
+			 'string','Compute','Callback','dfield8(''kcompute'')');
     
     kbd.close = uicontrol('style','push',...
-			  'string','Close','call','close');
+			  'string','Close','Callback','close');
     
     nudge = 3; 
     left = 3; varl = 80; buttw = 60;
@@ -2082,7 +2083,7 @@ function output = dfield8(action,input1,input2,input3)
 	'  set([ud.t0,ud.tf],''background'',[0.83 0.82 0.78]);',...
 	'end'];
     
-    set(kbd.spec,'call',speccall);
+    set(kbd.spec,'Callback',speccall);
     set(ppkbd,'resize','on');
     set(findobj(ppkbd,'type','uicontrol'),'units','normal');
     
@@ -2177,7 +2178,7 @@ function output = dfield8(action,input1,input2,input3)
     kk = find(ishandle(dud.contours));    
     delete(dud.contours(kk));
     dud.contours = [];
-    if (notice ~= 0)
+    if isvalid(notice)
       set(dud.butt(1),'enable','off');
     end
     set(disph,'user',dud);
@@ -2195,7 +2196,7 @@ function output = dfield8(action,input1,input2,input3)
     kk = find(ishandle(dud.plhand));    
     delete(dud.plhand(kk));
     dud.plhand = [];
-    if (notice ~= 0)
+    if isvalid(notice)
       set(dud.butt(1),'enable','off');
     end
     set(disph,'user',dud);
@@ -2210,7 +2211,7 @@ function output = dfield8(action,input1,input2,input3)
     kk = find(ishandle(dud.contours));       
     delete(dud.contours(kk));
     dud.contours = [];
-    if (notice ~=0)
+    if isvalid(notice)
       set(dud.butt(1),'enable','off');
     end
     set(disph,'user',dud);
@@ -2290,11 +2291,11 @@ function output = dfield8(action,input1,input2,input3)
     
     left = 5; nudge = 1; varl = 70;
     
-    setfig = figure('name','dfield8 Solver settings','numbertitle','off',...
+    setfig = figure('name','dfield8 Solver settings','NumberTitle','off',...
 		    'tag','dfield8','vis','off');
     
     dfield8('figdefault',setfig);
-    set(setfig,'menubar','none');
+    set(setfig,'menubar','figure');
     
     setfr = uicontrol('style','frame');	
     
@@ -2304,7 +2305,7 @@ function output = dfield8(action,input1,input2,input3)
 		   'string',d1string);
     
     data.d1 = uicontrol('style','edit','string',d1data,...
-			'call',d1call,'background','w');
+			'Callback',d1call,'background','w');
     
     rtolcall =['data = get(gcf,''user'');',...
 	       'data.settings.tol = str2num(get(data.rtol,''string''));',...
@@ -2322,11 +2323,11 @@ function output = dfield8(action,input1,input2,input3)
     ss = uicontrol('style','text','horiz','center',...
 		   'string',ssname);
     
-    gob = uicontrol('style','push','string','Go Away','call','close');
+    gob = uicontrol('style','push','string','Go Away','Callback','close');
     
     data.chb = uicontrol('style','push',...
 			 'string','Change settings',...
-			 'call',chcall,...
+			 'Callback',chcall,...
 			 'enable','off');
     
     data.speed = uicontrol('style','slider',...
@@ -2335,7 +2336,7 @@ function output = dfield8(action,input1,input2,input3)
 			   'max',100,...
 			   'value',data.settings.speed,...
 			   'sliderstep',[1/98,10/98],...
-			   'call',speedcall);
+			   'Callback',speedcall);
     
     data.sp.min = uicontrol('style','text','string',' 2',...
 			    'horiz','left');
@@ -2406,14 +2407,14 @@ function output = dfield8(action,input1,input2,input3)
       rtol = uicontrol('style','text','horiz','left',...
 		       'pos',[sl+5,rtolb,stw-5,ht],...
 		       'string','Relative error tolerance: '); 
-      data.rtol = uicontrol('style','edit','call',rtolcall,...
+      data.rtol = uicontrol('style','edit','Callback',rtolcall,...
 			    'pos',[sl+stw,rtolb,varl,ht],...
 			    'string',num2str(data.settings.tol),...
 			    'background','w');
       hmax = uicontrol('style','text','horiz','left',...
 		       'pos',[sl+5,hmaxb,stw-5,ht],...
 		       'string','Maximum step size: '); 
-      data.hmax = uicontrol('style','edit','call',hmaxcall,...
+      data.hmax = uicontrol('style','edit','Callback',hmaxcall,...
 			    'pos',[sl+stw,hmaxb,varl,ht],...
 			    'string',num2str(data.settings.hmax),...
 			    'background','w');
@@ -2445,11 +2446,11 @@ function output = dfield8(action,input1,input2,input3)
       close(setfig);
     end
     setfig = figure('name','dfield8 Window settings',...
-		    'numbertitle','off',...
+		    'NumberTitle','off',...
 		    'tag','dfield8','vis','off');
     
     dfield8('figdefault',setfig);
-    set(setfig,'menubar','none');
+    set(setfig,'menubar','figure');
     
     dirffr = uicontrol('style','frame');	
     cwfr = uicontrol('style','frame');
@@ -2465,18 +2466,18 @@ function output = dfield8(action,input1,input2,input3)
     
     cw1 = uicontrol('style','text','horiz','left',...
 		    'string','The calculation window is');
-    data.mag = uicontrol('style','edit','call',magcall,...
+    data.mag = uicontrol('style','edit','Callback',magcall,...
 			 'string',num2str(kk),'background','w');
     cw2 = uicontrol('style','text','horiz','left',...
 		    'string',' times as large as the ');
     cw3 = uicontrol('style','text','horiz','left',...
 		    'string','display window.');
     
-    gob = uicontrol('style','push','string','Go Away','call','close');
+    gob = uicontrol('style','push','string','Go Away','Callback','close');
     
     chb = uicontrol('style','push',...
 		    'string','Change settings',...
-		    'call','dfield8(''setchange'')');
+		    'Callback','dfield8(''setchange'')');
     
     left = 1; nudge = 3; 
     
@@ -2585,7 +2586,7 @@ function output = dfield8(action,input1,input2,input3)
 	       'end,',...
 	       'set(gcf,''user'',ud);'];
     
-    set(data.rad,'call',callrad);
+    set(data.rad,'Callback',callrad);
     
     nfptsstr = {'Number of field points'; 'per row or column.'};
     nfptstext = uicontrol('style','text',...
@@ -2617,7 +2618,7 @@ function output = dfield8(action,input1,input2,input3)
     npts = uicontrol('style','edit',...
 		     'pos',[textleft+(textw -30*ht/19)/2,rb1b 30*ht/19,ht],...
 		     'string',npts,...
-		     'call',callnfpts,...
+		     'Callback',callnfpts,...
 		     'visible','off',...
 		     'background','w');
     
@@ -2697,7 +2698,7 @@ function output = dfield8(action,input1,input2,input3)
     set(disph,'WindowButtonDownFcn','');
     trjh = [dud.solhand;dud.plhand;dud.contours];
     notice = dud.notice;
-    if (notice ~=0)
+    if isvalid(notice)
       nstr = get(notice,'string');
       nstr(1:4) = nstr(2:5);
       nstr{5} = 'Select a graphics object with the mouse.';
@@ -2713,20 +2714,20 @@ function output = dfield8(action,input1,input2,input3)
       dud.plhand = setdiff(dud.plhand,objh);  
       dud.contours = setdiff(dud.contours,objh);  
       delete(objh); 
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr(1:4) = nstr(2:5);
 	nstr{5} = 'Ready.';
 	set(notice,'string',nstr);
       end
     elseif strcmp(typ,'text') & ~ismember(objh,hh)
       delete(objh); 
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr(1:4) = nstr(2:5);
 	nstr{5} = 'Ready.';
 	set(notice,'string',nstr);
       end
     else
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr(1:4) = nstr(2:5);
 	nstr{5} = 'The object you selected cannot be deleted.';
 	set(notice,'string',nstr);
@@ -2834,11 +2835,11 @@ function output = dfield8(action,input1,input2,input3)
     end
     dflevel = figure('name','dfield8 Level sets',...
 		     'vis','off',...
-		     'numbertitle','off','tag','dfield8');
+		     'NumberTitle','off','tag','dfield8');
     
     dfield8('figdefault',dflevel);
     hhsetup = get(0,'showhiddenhandles');
-    set(dflevel,'menubar','none');
+    set(dflevel,'menubar','figure');
     
     lev.fr1 = uicontrol('style','frame');
     lev.fr2 = uicontrol('style','frame');
@@ -2850,7 +2851,7 @@ function output = dfield8(action,input1,input2,input3)
 			  'string',inst1str);
     
     lev.lfcn = uicontrol('style','edit','horiz','center',...
-			 'string',lfcn,'call','',...
+			 'string',lfcn,'Callback','',...
 			 'background','w');
     
     lev.ch(3) = uicontrol('style','radio','horiz','center',...
@@ -2874,15 +2875,15 @@ function output = dfield8(action,input1,input2,input3)
 			   'string','Enter a vector of level values.');
     
     lev.rhs = uicontrol('style','edit','horiz','center',...
-			'string',' ','call','');
+			'string',' ','Callback','');
     
     lev.proc = uicontrol('style','push',...		
 			 'string','Proceed',...
-			 'call','dfield8(''levcomp'')');
+			 'Callback','dfield8(''levcomp'')');
     
     lev.close = uicontrol('style','push',...
 			  'string','Close',...
-			  'call','close');
+			  'Callback','close');
     
     for i=1:3
       set(lev.ch(i),'user',lev.ch(:,[1:(i-1),(i+1):3]));
@@ -2901,7 +2902,7 @@ function output = dfield8(action,input1,input2,input3)
 	'   set(ud.rhs,''enable'',''off'',''backg'',col);',...
 	'end,'];
     
-    set(lev.ch,'call',callrad);
+    set(lev.ch,'Callback',callrad);
     
     left = 2; varl = 400; buttw = 60;
     nudge = 3;   
@@ -3507,10 +3508,10 @@ function output = dfield8(action,input1,input2,input3)
     pos = get(gcf,'pos');
     wpos = [pos(1),pos(2)+pos(4)+20,300,20];
     waith = figure('pos',wpos,...
-		   'numbertitle','off',...
+		   'NumberTitle','off',...
 		   'vis','off',...
 		   'next','replace',...
-		   'menubar','none',...
+		   'menubar','figure',...
 		   'resize','off',...
 		   'createfcn','');
     axes('pos',[0.01,0.01,0.98,0.98],...
@@ -3519,8 +3520,8 @@ function output = dfield8(action,input1,input2,input3)
     yp = [0 0 1 1];
     xl = [1 0 0 1 1];
     yl = [0 0 1 1 0];
-    patchh = patch(xp,yp,'r','edgecolor','r','erase','none');
-    lineh = line(xl,yl,'erase','none','color','k');
+    patchh = patch(xp,yp,'r','edgecolor','r');
+    lineh = line(xl,yl,'color','k');
     type = input1;  
     set(sud.h.gallery,'enable','off');
     if strcmp(type,'default')
@@ -3538,13 +3539,13 @@ function output = dfield8(action,input1,input2,input3)
       xp = [xp(2),x,x,xp(2)];
       set(patchh,'xdata',xp);
       set(lineh,'xdata',xl);
-      drawnow;
+      %drawnow;
       sep = 'on';
       for kk = 1:length(system)
 	kkk = num2str(kk);
 	if kk ==2, sep = 'off';end
 	uimenu(megall,'label',system(kk).name,...
-	       'call',['dfield8(''system'',',kkk,')'],...
+	       'Callback',['dfield8(''system'',',kkk,')'],...
 	       'separator',sep);
       end % for
       set(megall,'user',system);
@@ -3614,7 +3615,7 @@ function output = dfield8(action,input1,input2,input3)
       xp = [xp(2),x,x,xp(2)];
       set(patchh,'xdata',xp);
       set(lineh,'xdata',xl);
-      drawnow;
+      % drawnow;
       nnn = kk/8;  % The number of equations.
       for j = 1:nnn
 	for k = 2:8 ;
@@ -3631,7 +3632,7 @@ function output = dfield8(action,input1,input2,input3)
       xp = [xp(2),x,x,xp(2)];
       set(patchh,'xdata',xp);
       set(lineh,'xdata',xl);
-      drawnow;
+      % drawnow;
       newsyst = newsysstruct(j);
       sname = newsyst.name;
       sname(find(abs(sname) == 95)) = ' '; % Replace underscores with spaces.
@@ -3673,7 +3674,7 @@ function output = dfield8(action,input1,input2,input3)
     xp = [xp(2),x,x,xp(2)];
     set(patchh,'xdata',xp);
     set(lineh,'xdata',xl);
-    drawnow;
+    %drawnow;
     delete(waith);
     
   elseif strcmp(action,'addgall')
@@ -3779,7 +3780,7 @@ function output = dfield8(action,input1,input2,input3)
       end      
       kkk = num2str(ll+1); 
       newmenu = uimenu(sud.h.gallery,'label',sname,...
-		       'call',['dfield8(''system'',',kkk,')'],...
+		       'Callback',['dfield8(''system'',',kkk,')'],...
 		       'separator',sepstr);
       set(findobj('tag','savegal'),'enable','on');
     end
@@ -3804,7 +3805,7 @@ function output = dfield8(action,input1,input2,input3)
     notice = dud.notice;
     switch length(trjh)
      case 0
-      if (notice ~= 0) 
+      if isvalid(notice) 
 	nstr = get(notice,'string');
 	nstr(1:3) = nstr(3:5);
 	nstr{4} = 'There are no solutions.';
@@ -3816,7 +3817,7 @@ function output = dfield8(action,input1,input2,input3)
      case 1
       th = trjh;
      otherwise
-      if (notice ~= 0)
+      if isvalid(notice)
 	nstr = get(notice,'string');
 	nstr(1:4) = nstr(2:5);
 	nstr{5} = 'Select a solution with the mouse.';
@@ -3826,7 +3827,7 @@ function output = dfield8(action,input1,input2,input3)
     th = get(disph,'currentobject');
     end
     if isempty(th)
-      if (notice ~= 0) 
+      if isvalid(notice) 
 	nstr = get(notice,'string');
 	nstr(1:3) = nstr(3:5);
 	nstr{4} = 'The item selected is not a solution.';
@@ -3850,7 +3851,7 @@ function output = dfield8(action,input1,input2,input3)
       xval = get(th,'ydata');
       ivstr = struct(tname,tval,xname,xval);
       assignin('base',vstr,ivstr);
-      if (notice ~= 0) 
+      if isvalid(notice) 
 	nstr = get(notice,'string');
 	nstr(1:3) = nstr(3:5);
 	nstr{4} = ['The data has been exported as the structure ',...
@@ -3965,7 +3966,6 @@ ud.stop = 0;
 % Set the the line handle.
 
 ph = plot([tspan(1),tspan(1)],[y0,y0],'color',col,...
-    'erase','none',...
     'parent',dispha);
 ud.line = ph;
 
@@ -3975,8 +3975,7 @@ vi = dud.pline;
 figure(disph);
 v = axis;
 aa = v(1)+0.01*(v(2)-v(1));
-plh = plot(aa,y0,'.','markersize',20,'color',col,...
-    'erase','xor','parent',dispha,'visible',vi);    
+plh = plot(aa,y0,'.','markersize',20,'color',col,'parent',dispha,'visible',vi);    
 ud.pline = plh;
 set(dispha,'UserData',ud);
 
@@ -4121,7 +4120,7 @@ while ~stop
   i = oldN:N;    
   set(ph,'Xdata',tout(i),'Ydata',yout(i));
   set(plh,'Xdata',aa,'Ydata',yn);
-  drawnow    
+  %drawnow    
   
   % Compute a new step size.
   absh = max(hmin,0.8*absh / max( alpha,0.1));
@@ -4143,7 +4142,7 @@ end  % while ~stop
 tout = tout(1:N);
 yout = yout(1:N,:);
 
-if (dud.notice ~= 0)
+if isvalid(dud.notice)
   nstr = get(dud.notice,'string');
 
   switch stop
@@ -4159,7 +4158,7 @@ if (dud.notice ~= 0)
   end
   set(dud.notice,'string',nstr);
 end
-drawnow
+%drawnow
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4196,7 +4195,6 @@ ud.stop = 0;
 % Set the the line handle.
 
 ph = plot([tspan(1),tspan(1)],[y0,y0],'color',col,...
-    'erase','none',...
     'parent',dispha);
 ud.line = ph;
 
@@ -4206,8 +4204,7 @@ vi = dud.pline;
 figure(disph);
 v = axis;
 aa = v(1)+0.01*(v(2)-v(1));
-plh = plot(aa,y0,'.','markersize',20,'color',col,...
-    'erase','xor','parent',dispha,'visible',vi);    
+plh = plot(aa,y0,'.','markersize',20,'color',col,'parent',dispha,'visible',vi);    
 ud.pline = plh;
 set(dispha,'UserData',ud);
 
@@ -4263,7 +4260,7 @@ while ~stop
   i = (N-1):N;    
   set(ph,'Xdata',tout(i),'Ydata',yout(i));
   set(plh,'Xdata',aa,'Ydata',y);
-  drawnow    
+  %drawnow    
   if slow
     ttt= N/(speed);
     tt = toc;
@@ -4276,7 +4273,7 @@ end  % while ~stop
 
 tout = tout(1:N);
 yout = yout(1:N,:);
-if dud.notice
+if isvalid(dud.notice)
   nstr = get(dud.notice,'string');
   
   switch stop
@@ -4292,7 +4289,7 @@ if dud.notice
   end
   set(dud.notice,'string',nstr);
 end
-drawnow
+%drawnow
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4329,9 +4326,7 @@ ud.stop = 0;
 
 % Set the the line handle.
 
-ph = plot([tspan(1),tspan(1)],[y0,y0],'color',col,...
-    'erase','none',...
-    'parent',dispha);
+ph = plot([tspan(1),tspan(1)],[y0,y0],'color',col,'parent',dispha);
 ud.line = ph;
 
 % Set up the phase line
@@ -4340,8 +4335,7 @@ vi = dud.pline;
 figure(disph);
 v = axis;
 aa = v(1)+0.01*(v(2)-v(1));
-plh = plot(aa,y0,'.','markersize',20,'color',col,...
-    'erase','xor','parent',dispha,'visible',vi);    
+plh = plot(aa,y0,'.','markersize',20,'color',col,'parent',dispha,'visible',vi);    
 ud.pline = plh;
 set(dispha,'UserData',ud);
 
@@ -4399,7 +4393,7 @@ while ~stop
   i = (N-1):N;    
   set(ph,'Xdata',tout(i),'Ydata',yout(i));
   set(plh,'Xdata',aa,'Ydata',y);
-  drawnow
+  %drawnow
   if slow
     ttt= N/(speed);
     tt = toc;
@@ -4412,7 +4406,7 @@ end  % while ~stop
 
 tout = tout(1:N);
 yout = yout(1:N,:);
-if dud.notice
+if isvalid(dud.notice)
   nstr = get(dud.notice,'string');
   
   switch stop
@@ -4428,7 +4422,7 @@ if dud.notice
   end
   set(dud.notice,'string',nstr);
 end
-drawnow
+%drawnow
 
 
 
@@ -4467,7 +4461,6 @@ ud.stop = 0;
 % Set the the line handle.
 
 ph = plot([tspan(1),tspan(1)],[y0,y0],'color',col,...
-    'erase','none',...
     'parent',dispha);
 ud.line = ph;
 
@@ -4478,7 +4471,7 @@ figure(disph);
 v = axis;
 aa = v(1)+0.01*(v(2)-v(1));
 plh = plot(aa,y0,'.','markersize',20,'color',col,...
-    'erase','xor','parent',dispha,'visible',vi);    
+    'parent',dispha,'visible',vi);    
 ud.pline = plh;
 set(dispha,'UserData',ud);
 
@@ -4539,7 +4532,7 @@ while ~stop
   i = (N-1):N;    
   set(ph,'Xdata',tout(i),'Ydata',yout(i));
   set(plh,'Xdata',aa,'Ydata',y);
-  drawnow    
+%   drawnow    
   if slow
     ttt= N/(speed);
     tt = toc;
@@ -4552,7 +4545,7 @@ end  % while ~stop
 
 tout = tout(1:N);
 yout = yout(1:N,:);
-if dud.notice
+if isvalid(dud.notice)
   nstr = get(dud.notice,'string');
   
   switch stop
@@ -4568,7 +4561,8 @@ if dud.notice
   end
   set(dud.notice,'string',nstr);
 end
-drawnow
+%drawnow
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
